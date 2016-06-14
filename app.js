@@ -2368,12 +2368,11 @@ var TabContent = React.createClass({
   render: function() {
     switch(worldStore.state.currTab) {
       case 'FAUCET':        
-	  return React.createElement(MyBetsTabContent, null);
+	  return React.createElement(FaucetTabContent, null);
       case 'ALL_BETS':
-        return React.createElement(FaucetTabContent, null);
-      case 'MY_BETS':
-
         return React.createElement(AllBetsTabContent, null);
+      case 'MY_BETS':
+        return React.createElement(MyBetsTabContent, null);
       default:
         alert('Unsupported currTab value: ', worldStore.state.currTab);
         break;
