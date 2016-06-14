@@ -1815,7 +1815,6 @@ var MultiplierNumber = React.createClass({
       )            
         )
       )
-    );
   }
 });
 
