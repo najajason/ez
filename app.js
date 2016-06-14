@@ -1760,7 +1760,7 @@ var BetBoxButton = React.createClass({
               {
                 id: 'bet-hi',
                 type: 'button',
-                className: 'btn btn-default btn-md btn-success disabled',
+                className: 'btn btn-default btn-lg btn-success disabled',
 				onClick: go = 1,
 				opacity: 1,
 				onClick: this._makeBetHandler('<'),
