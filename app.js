@@ -1806,8 +1806,6 @@ var MultiplierNumber = React.createClass({
   displayName: 'MultiplierNumber',
   render: function() {
     return (
-      el.div(
-          {className: 'row'},
 	  el.div(
         {className: 'col-md-2'},
         el.div(
@@ -1818,7 +1816,6 @@ var MultiplierNumber = React.createClass({
           },
             totalmultiplier.toFixed(2)+"X"
         )
-		)
       )
     );
   }
