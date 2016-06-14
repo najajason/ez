@@ -1684,7 +1684,7 @@ if (bet.profit < 0){
 		  };
 		  
 		        
-		if (bet.profit >= 0) {
+		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true) {
 		currentBet = currentBet+bet.profit;
 		plusbits = Math.floor(totalmultiplier)/100
 		totalmultiplier = totalmultiplier+plusbits;
@@ -1693,10 +1693,11 @@ if (bet.profit < 0){
 
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
+;
+		if (worldStore.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1;
-		currentMultiplier = 1;
-		if (worldStore.state.hotkeysEnabled == true){
+		currentMultiplier = 1
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		};
       }
