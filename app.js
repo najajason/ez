@@ -642,8 +642,8 @@ var worldStore = new Store('world', {
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
-		totalmultiplier = 1.01;
-		currentMultiplier = 1.01;
+		totalmultiplier = 1;
+		currentMultiplier = 1;
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		}
@@ -1625,7 +1625,7 @@ var BetBoxButton = React.createClass({
         cond, helpers.multiplierToWinProb(currentMultiplier)
       );
 	  var wincondition = Math.pow(2,32)
- if (currentMultiplier == 1){
+ if (currentMultiplier == 1.01){
  currentBet = betStore.state.wager.num*100;
  }
  
@@ -1696,8 +1696,8 @@ if (bet.profit < 0){
 ;
 		if (worldStore.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
-		totalmultiplier = 1;
-		currentMultiplier = 1
+		totalmultiplier = 1.01;
+		currentMultiplier = 1.01
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		};
       }
