@@ -644,7 +644,7 @@ var worldStore = new Store('world', {
 		totalmultiplier = 1;
 		currentMultiplier = 1;
 		} else {
-		Dispatcher.sendAction('NEW_BET', BetBoxButton.bet);
+		cashout();
 		}
   });
   
@@ -1657,7 +1657,9 @@ var BetBoxButton = React.createClass({
 if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
 		  }
-
+function cashout(){
+Dispatcher.sendAction('NEW_BET', bet);
+}
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
 ;
