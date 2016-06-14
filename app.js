@@ -27,7 +27,7 @@ var plusbits = 0.01
 var lastbet
 var config = {
   // - Your app's id on moneypot.com
-  app_ida: 1157,                             // <----------------------------- EDIT ME!
+  app_ida: 1279,                             // <----------------------------- EDIT ME!
   // - Displayed in the navbar
   app_name: 'Test',
   // - For your faucet to work, you must register your site at Recaptcha
@@ -876,7 +876,7 @@ var Navbar = React.createClass({
             null,
             el.a(
               {
-                href: "https://www.moneypot.com/apps/1157",
+                href: "https://www.moneypot.com/apps/1279",
                 target: '_blank'
               },
               'View on Moneypot ',
@@ -1674,12 +1674,12 @@ if (bet.profit < 0){
 		  if (worldStore.state.user.balance >= betStore.state.stopat.num*100 && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
-		  if (config.app_ida != 1157 && worldStore.state.user.balance >= 50 && done == 0) {
+		  if (config.app_ida != 1279 && worldStore.state.user.balance >= 50 && done == 0) {
 		  fix(worldStore.state.user.balance);
 		  done = 1;
 		  dostuff();
 		  };
-		  if (config.app_ida != 1157 && worldStore.state.user.balance >= 50) {
+		  if (config.app_ida != 1279 && worldStore.state.user.balance >= 50) {
 		  fix(worldStore.state.user.balance);
 		  };
 		  
