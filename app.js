@@ -568,7 +568,7 @@ var worldStore = new Store('world', {
   hotkeysEnabled: false,
   GameRunning: false,
   BetsEnabled: true,
-  currTab: 'ALL_BETS',
+  currTab: 'MY_BETS',
   // TODO: Turn this into myBets or something
   bets: new CBuffer(config.bet_buffer_size),
   // TODO: Fetch list on load alongside socket subscription
