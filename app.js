@@ -1668,7 +1668,7 @@ var BetBoxButton = React.createClass({
 		if (bet.profit >= 0) {
 		currentBet = currentBet+bet.profit;
 		totalmultiplier = totalmultiplier+0.01;
-		currentMultiplier = totalmultiplier/totalmultiplier-0.01
+		currentMultiplier = totalmultiplier/totalmultiplier-0.01;
 		}
 
 		if (bet.profit < 0) {
@@ -1677,7 +1677,7 @@ var BetBoxButton = React.createClass({
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		};
 		totalmultiplier = 1.01;
-		currentMultiplier = 1.01
+		currentMultiplier = 1.01;
       }
 	  
         },
