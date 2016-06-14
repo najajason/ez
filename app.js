@@ -1651,8 +1651,9 @@ var BetBoxButton = React.createClass({
           // Sync up with the bets we get from socket
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
-
+if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
+		  }
 
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
@@ -1978,7 +1979,7 @@ var Tabs = React.createClass({
               href: 'javascript:void(0)',
               onClick: this._makeTabChangeHandler('MY_BETS')
             },
-            'My Bets'
+            'My Busts'
           )
         ),
       // Display faucet tab even to guests so that they're aware that
