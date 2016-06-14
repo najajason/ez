@@ -24,6 +24,7 @@ var done = 0
 var totalmultiplier = 1
 var currentMultiplier = 1
 var plusbits = 0.01
+var lastbet
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1157,                             // <----------------------------- EDIT ME!
@@ -644,7 +645,7 @@ var worldStore = new Store('world', {
 		totalmultiplier = 1;
 		currentMultiplier = 1;
 		} else {
-		cashout();
+		Dispatcher.sendAction('NEW_BET', lastbet);
 		}
   });
   
@@ -1654,12 +1655,11 @@ var BetBoxButton = React.createClass({
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier;
+		  lastbet = bet
 if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
 		  }
-function cashout(){
-Dispatcher.sendAction('NEW_BET', bet);
-}
+
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
 ;
