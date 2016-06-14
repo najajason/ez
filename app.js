@@ -1651,6 +1651,7 @@ var BetBoxButton = React.createClass({
           // Sync up with the bets we get from socket
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
+		  bet.busted = totalmultiplier;
 if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
 		  }
@@ -2023,7 +2024,7 @@ var MyBetsTabContent = React.createClass({
             el.th(null, 'Time'),
             el.th(null, 'User'),
             el.th(null, 'Wager'),
-            el.th({className: 'text-right'}, 'Multiplier'),
+            el.th({className: 'text-right'}, 'Busted at'),
             // el.th(null, 'Roll'),
             el.th(
               {
@@ -2083,7 +2084,7 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        (bet.profit/bet.wager+1).toFixed(2)
+        (bet.busted).toFixed(2)
       ),
               // profit
               el.td(
