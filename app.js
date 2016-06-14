@@ -1617,7 +1617,7 @@ var BetBoxButton = React.createClass({
       );
 	  var wincondition = Math.pow(2,32)
  if (currentMultiplier == 1){
- currentBet = betStore.state.wager.num;
+ currentBet = betStore.state.wager.num*100;
  }
  
       var params = {
