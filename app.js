@@ -526,6 +526,10 @@ var betStore = new Store('bet', {
       n = Math.max(n, 1);
       self.state.wager.str = n.toString();
     }
+	    if (isFinite(n)) {
+      n = Math.max(n, 1);
+      self.state.wager.num = n;
+    }
 
     // Ensure wagerString is a number
       // wagerString is valid
