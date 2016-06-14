@@ -1810,10 +1810,10 @@ var MultiplierNumber = React.createClass({
         {className: 'col-xs-12'},
         el.div(
           {
-            className: 'btn-lg btn-success btn-block',
+            className: 'btn btn-lg btn-success btn-block',
             style: { marginTop: '-15px' }
           },
-            'Multiplier: '+totalmultiplier.toFixed(2)
+            totalmultiplier.toFixed(2)+"X"
         )
       )
     );
