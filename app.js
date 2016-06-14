@@ -1674,6 +1674,8 @@ var BetBoxButton = React.createClass({
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		totalmultiplier = 1;
+		currentMultiplier = 1
       }
 	  
         },
