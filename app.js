@@ -1807,8 +1807,8 @@ var HotkeyToggle = React.createClass({
             style: { marginTop: '-15px' }
           },
           worldStore.state.hotkeysEnabled ?
-            'Place Bet' :
-          'Cashout'
+            'Cashout' :
+          'Place Bet'
         )
       )
     );
