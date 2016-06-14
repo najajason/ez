@@ -1811,7 +1811,7 @@ var MultiplierNumber = React.createClass({
         el.button(
           {
            type: 'button', 
-            className: 'btn btn-lg btn-success',
+            className: 'btn btn-lg btn-success btn-block',
             style: { marginTop: '-15px' }
           },
             totalmultiplier.toFixed(2)+"X"
