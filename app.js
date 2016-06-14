@@ -1763,7 +1763,7 @@ var BetBoxButton = React.createClass({
 				onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              'Multiply My Bits'
+              totalmultiplier.toFixed(2)+"X"
             )
           )
           
@@ -1933,10 +1933,7 @@ var BetBox = React.createClass({
           {className: 'panel-footer clearfix'},
           React.createElement(BetBoxButton, null)
         ),        
-		el.div(
-          {className: 'panel-footer clearfix'},
-          React.createElement(MultiplierNumber, null)
-        ),
+		
 	  
       React.createElement(HotkeyToggle, null)
 	  );
