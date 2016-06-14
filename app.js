@@ -644,7 +644,7 @@ var worldStore = new Store('world', {
 		totalmultiplier = 1;
 		currentMultiplier = 1;
 		} else {
-		Dispatcher.sendAction('NEW_BET', bet);
+		Dispatcher.sendAction('NEW_BET', BetBoxButton.bet);
 		}
   });
   
