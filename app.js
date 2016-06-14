@@ -1751,7 +1751,6 @@ var BetBoxButton = React.createClass({
     } else if (worldStore.state.user) {
       // If user is logged in, let them submit bet
       innerNode =
-        el.div(
           // bet hi
           el.div(
             {className: 'col-xs-12'},
@@ -1767,9 +1766,7 @@ var BetBoxButton = React.createClass({
               },
               totalmultiplier.toFixed(2)+"X"
             )
-          )
-          
-        );
+          );
         
     } else {
       // If user isn't logged in, give them link to /oauth/authorize
