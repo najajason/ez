@@ -1976,7 +1976,7 @@ var Tabs = React.createClass({
               href: 'javascript:void(0)',
               onClick: this._makeTabChangeHandler('MY_BETS')
             },
-            'My Bets'
+            'Bets'
           )
         ),
       // Display faucet tab even to guests so that they're aware that
