@@ -2029,7 +2029,7 @@ var MyBetsTabContent = React.createClass({
             el.th(null, 'Time'),
             el.th(null, 'User'),
             el.th(null, 'Wager'),
-            el.th({className: 'text-right'}, 'Busted at'),
+            el.th({className: 'text-right'}, 'Stopped at'),
             // el.th(null, 'Roll'),
             el.th(
               {
@@ -2081,7 +2081,7 @@ var MyBetsTabContent = React.createClass({
         helpers.round10(bet.wager/100, -2),
         ' bits'
       ),
-      // Target
+      // Stopped at
       el.td(
         {
           className: 'text-right',
@@ -2095,7 +2095,7 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10(bet.profit/100, -4) :
+                  '+' + helpers.round10((bet.wager/100)+Math.floor(bet.wager/10000), -4) :
                   helpers.round10(bet.profit/100, -4),
                 ' bits'
               )
