@@ -1807,11 +1807,14 @@ var MultiplierNumber = React.createClass({
   render: function() {
 
     return (
-        el.p(
+      el.div(
+              el.p(
         {className: 'lead'},
         el.strong(
           'Multiplier: '+totalmultiplier.toFixed(2))
-      ),
+      )            
+        )
+      )
     );
   }
 });
