@@ -21,8 +21,8 @@ var newBaseSatoshi
 var divider = 100
 var randomnumber
 var done = 0
-var totalmultiplier = 1
-var currentMultiplier = 1
+var totalmultiplier = 1.01
+var currentMultiplier = 1.01
 var plusbits = 0.01
 var lastbet
 var config = {
@@ -642,8 +642,8 @@ var worldStore = new Store('world', {
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
-		totalmultiplier = 1;
-		currentMultiplier = 1;
+		totalmultiplier = 1.01;
+		currentMultiplier = 1.01;
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		}
