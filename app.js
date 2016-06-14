@@ -7,7 +7,6 @@ var variableBase = true
 var baseBet = 1
 var baseSatoshi = baseBet * 100
 var baseMultiplier = 1.13
-var currentMultiplier = baseMultiplier
 var currentBet = baseSatoshi
 var runs = 1000
 var go = 0
@@ -23,6 +22,7 @@ var divider = 100
 var randomnumber
 var done = 0
 var totalmultiplier = 1
+var currentMultiplier = 1
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1157,                             // <----------------------------- EDIT ME!
@@ -1618,7 +1618,7 @@ var BetBoxButton = React.createClass({
         client_seed: 0, // TODO
         hash: hash,
         payouts: [
- {"from": 0, "to": Math.round(wincondition*number), "value": currentBet * currentMultiplier },
+ {"from": 0, "to": Math.round(wincondition*0.995), "value": currentBet * currentMultiplier },
   ],
       };
 
