@@ -643,6 +643,8 @@ var worldStore = new Store('world', {
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1;
 		currentMultiplier = 1;
+		} else {
+		Dispatcher.sendAction('NEW_BET', bet);
 		}
   });
   
