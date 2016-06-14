@@ -1809,7 +1809,7 @@ var MultiplierNumber = React.createClass({
       el.div(
           {className: 'row'},
 	  el.div(
-        {className: 'col-xs-12'},
+        {className: 'col-md-2'},
         el.div(
           {
            type: 'button', 
