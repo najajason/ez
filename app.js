@@ -2078,7 +2078,7 @@ var MyBetsTabContent = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10(bet.wager/100, -2),
+        helpers.round10((bet.wager/100)/(bet.busted-0.01), -2),
         ' bits'
       ),
       // Stopped at
@@ -2089,7 +2089,7 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        (bet.busted).toFixed(2)
+        (bet.busted-0.01).toFixed(2)
       ),
               // profit
               el.td(
