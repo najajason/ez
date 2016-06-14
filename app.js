@@ -1785,6 +1785,7 @@ var BetBoxButton = React.createClass({
     return el.div(
       null,
       el.div(
+          {className: 'row'},
         {className: 'col-md-2',},
         (this.state.waitingForServer) ?
           el.span(
@@ -1807,9 +1808,6 @@ var MultiplierNumber = React.createClass({
   render: function() {
     return (
       el.div(
-	    el.div(
-          {className: 'row'},
-		  
         {className: 'col-xs-12'},
         el.div(
           {
@@ -1819,7 +1817,6 @@ var MultiplierNumber = React.createClass({
             totalmultiplier.toFixed(2)+"X"
         )
       )
-	  )
     );
   }
 });
