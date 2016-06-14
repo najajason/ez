@@ -487,8 +487,8 @@ var chatStore = new Store('chat', {
 var betStore = new Store('bet', {
   nextHash: undefined,
   wager: {
-    str: '0.01',
-    num: 0.01,
+    str: '1',
+    num: 1,
     error: undefined
   },
   multiplier: {
@@ -1673,7 +1673,7 @@ var BetBoxButton = React.createClass({
 
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
-		currentBet = betStore.wager.num;
+		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1;
 		currentMultiplier = 1;
 		if (worldStore.state.hotkeysEnabled == true){
