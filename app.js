@@ -1771,7 +1771,7 @@ if (bet.profit < 0){
 				onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              totalmultiplier.toFixed(2)+"X"
+              (totalmultiplier-0.01).toFixed(2)+"X"
             )
           );
         
@@ -2089,13 +2089,13 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        (bet.busted+0.01).toFixed(2)
+        (bet.busted).toFixed(2)
       ),
               // profit
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10((bet.wager/100)+Math.floor(bet.wager/10000), -4) :
+                  '+' + helpers.round10((bet.wager/10000)+0.01, -4) :
                   helpers.round10(bet.profit/100, -4),
                 ' bits'
               )
