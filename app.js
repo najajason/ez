@@ -1931,7 +1931,10 @@ var BetBox = React.createClass({
         ),
         el.div(
           {className: 'panel-footer clearfix'},
-          React.createElement(BetBoxButton, null),
+          React.createElement(BetBoxButton, null)
+        ),        
+		el.div(
+          {className: 'panel-footer clearfix'},
           React.createElement(MultiplierNumber, null)
         ),
 	  
