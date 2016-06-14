@@ -1752,7 +1752,6 @@ var BetBoxButton = React.createClass({
       // If user is logged in, let them submit bet
       innerNode =
         el.div(
-          {className: 'row'},
           // bet hi
           el.div(
             {className: 'col-xs-12'},
