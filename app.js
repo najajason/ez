@@ -1807,14 +1807,13 @@ var MultiplierNumber = React.createClass({
   render: function() {
     return (
       el.div(
-        {className: 'text-center'},
+        {className: 'col-xs-12'},
         el.button(
           {
-            type: 'button',
             className: 'btn btn-default btn-sm',
             style: { marginTop: '-15px' }
           },
-            'Multiplier: '+totalmultiplier
+            'Multiplier: '+totalmultiplier.toFixed(2)
         )
       )
     );
