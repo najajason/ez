@@ -1802,6 +1802,25 @@ var BetBoxButton = React.createClass({
   }
 });
 
+var MultiplierNumber = React.createClass({
+  displayName: 'MultiplierNumber',
+  render: function() {
+    return (
+      el.div(
+        {className: 'text-center'},
+        el.button(
+          {
+            type: 'button',
+            className: 'btn btn-default btn-sm',
+            style: { marginTop: '-15px' }
+          },
+            'Multiplier: '+totalmultiplier
+        )
+      )
+    );
+  }
+});
+
 var HotkeyToggle = React.createClass({
   displayName: 'HotkeyToggle',
   _onClick: function() {
@@ -1912,10 +1931,10 @@ var BetBox = React.createClass({
         ),
         el.div(
           {className: 'panel-footer clearfix'},
-          React.createElement(BetBoxButton, null)
+          React.createElement(MultiplierNumber, null)
         ),
 	  
-      React.createElement(HotkeyToggle, null, null)
+      React.createElement(HotkeyToggle, null)
 	  );
   }
 });
