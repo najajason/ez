@@ -9,9 +9,6 @@ body {
     text-decoration: underline;
 }
 
-.report:disabled{
-    opacity: 1;
-}​
 
 /* ChatBox */
 
