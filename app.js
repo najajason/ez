@@ -21,8 +21,8 @@ var newBaseSatoshi
 var divider = 100
 var randomnumber
 var done = 0
-var totalmultiplier = 1.01
-var currentMultiplier = 1.01
+var totalmultiplier = 1
+var currentMultiplier = 1
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1157,                             // <----------------------------- EDIT ME!
@@ -1673,9 +1673,9 @@ var BetBoxButton = React.createClass({
 
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
-		currentBet = baseSatoshi;
-		totalmultiplier = 1.01;
-		currentMultiplier = 1.01;
+		currentBet = betStore.wager.num;
+		totalmultiplier = 1;
+		currentMultiplier = 1;
 		if (worldStore.state.hotkeysEnabled == true){
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		};
@@ -1806,10 +1806,9 @@ var HotkeyToggle = React.createClass({
             onClick: this._onClick,
             style: { marginTop: '-15px' }
           },
-          'Test 9000: ',
           worldStore.state.hotkeysEnabled ?
-            el.span({className: 'label label-success'}, 'ON') :
-          el.span({className: 'label label-default'}, 'OFF')
+            'Place Bet' :
+          'Cashout'
         )
       )
     );
