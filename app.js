@@ -1760,7 +1760,7 @@ var BetBoxButton = React.createClass({
               {
                 id: 'bet-hi',
                 type: 'button',
-                className: 'btn btn-lg btn-success btn-block disabled',
+                className: 'btn btn-md btn-success btn-block disabled',
 				onClick: go = 1,
 				opacity: 1,
 				onClick: this._makeBetHandler('<'),
@@ -1836,7 +1836,7 @@ var HotkeyToggle = React.createClass({
         el.button(
           {
             type: 'button',
-            className: 'btn btn-default btn-sm',
+            className: 'btn btn-default btn-lg',
             onClick: this._onClick,
             style: { marginTop: '-15px' }
           },
