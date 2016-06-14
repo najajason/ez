@@ -1673,6 +1673,7 @@ var BetBoxButton = React.createClass({
 
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
+		currentBet = baseSatoshi;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
 		if (worldStore.state.hotkeysEnabled == true){
