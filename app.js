@@ -639,6 +639,9 @@ var worldStore = new Store('world', {
   Dispatcher.registerCallback('TOGGLE_HOTKEYS', function() {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
+		currentBet = betStore.state.wager.num;
+		totalmultiplier = 1;
+		currentMultiplier = 1;
   });
   
     Dispatcher.registerCallback('TOGGLE_BETS', function() {
