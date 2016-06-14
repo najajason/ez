@@ -1805,17 +1805,13 @@ var BetBoxButton = React.createClass({
 var MultiplierNumber = React.createClass({
   displayName: 'MultiplierNumber',
   render: function() {
+
     return (
-      el.div(
-        {className: 'col-xs-12'},
-        el.button(
-          {
-            className: 'btn btn-default btn-sm',
-            style: { marginTop: '-15px' }
-          },
-            'Multiplier: '+totalmultiplier.toFixed(2)
-        )
-      )
+        el.p(
+        {className: 'lead'},
+        el.strong(
+          'Multiplier: '+totalmultiplier.toFixed(2))
+      ),
     );
   }
 });
