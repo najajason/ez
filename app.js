@@ -1813,7 +1813,7 @@ var MultiplierNumber = React.createClass({
         el.div(
           {
            type: 'button', 
-            className: 'btn btn-lg btn-success btn-block',
+            className: 'btn btn-lg btn-success',
             style: { marginTop: '-15px' }
           },
             totalmultiplier.toFixed(2)+"X"
