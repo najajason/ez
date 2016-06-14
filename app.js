@@ -23,6 +23,7 @@ var randomnumber
 var done = 0
 var totalmultiplier = 1
 var currentMultiplier = 1
+var plusbits = 0.01
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1157,                             // <----------------------------- EDIT ME!
@@ -1674,8 +1675,9 @@ var BetBoxButton = React.createClass({
 		        
 		if (bet.profit >= 0) {
 		currentBet = currentBet+bet.profit;
-		totalmultiplier = totalmultiplier+0.01;
-		currentMultiplier = totalmultiplier/(totalmultiplier-0.01);
+		plusbits = Math.floor(totalmultiplier)/100
+		totalmultiplier = totalmultiplier+plusbits;
+		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		}
 
 		if (bet.profit < 0) {
