@@ -22,7 +22,7 @@ var divider = 100
 var randomnumber
 var done = 0
 var totalmultiplier = 1
-var currentMultiplier = 1
+var currentMultiplier = 1.01
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1157,                             // <----------------------------- EDIT ME!
