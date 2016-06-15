@@ -524,14 +524,13 @@ var betStore = new Store('bet', {
     var n = parseFloat(self.state.wager.str).toFixed(2);
 
     // If n is a number, ensure it's at least 1 bit
-    if (isFinite(n)) {
       n = Math.max(n, 1);
       self.state.wager.str = n.toString();
-    }
-	    if (isFinite(n)) {
+	  
+
       n = Math.max(n, 1);
       self.state.wager.num = n;
-    }
+
 
     // Ensure wagerString is a number
       // wagerString is valid
