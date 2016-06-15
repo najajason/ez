@@ -1790,13 +1790,7 @@ if (bet.profit < 0){
       null,
       el.div(
         {className: 'col-md-2',},
-        (this.state.waitingForServer) ?
-          el.span(
-            {
-              className: 'glyphicon glyphicon-refresh rotate',
-              style: { marginTop: '15px' }
-            }
-          ) : ''
+		''
       ),
       el.div(
         {className: 'col-md-8'},
