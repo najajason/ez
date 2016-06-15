@@ -644,6 +644,9 @@ var worldStore = new Store('world', {
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
+          Dispatcher.sendAction('UPDATE_USER', {
+            balance: worldStore.state.user.balance + bet.profit
+          });
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		}
@@ -1669,9 +1672,7 @@ if (bet.profit < 0){
 
 		  
           // Update user balance
-          Dispatcher.sendAction('UPDATE_USER', {
-            balance: worldStore.state.user.balance + bet.profit
-          });
+
 		  
 		  if (worldStore.state.user.balance >= betStore.state.stopat.num*100 && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
@@ -1694,6 +1695,9 @@ if (bet.profit < 0){
 		}
 
 		if (bet.profit < 0) {
+          Dispatcher.sendAction('UPDATE_USER', {
+            balance: worldStore.state.user.balance + bet.profit
+          });
 		worldStore.state.GameRunning = false;	
 ;
 		if (worldStore.state.hotkeysEnabled == true){
