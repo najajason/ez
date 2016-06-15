@@ -1655,7 +1655,7 @@ var BetBoxButton = React.createClass({
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
-		  
+		  lastbet = bet;
 if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
 		  }
