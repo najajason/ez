@@ -1661,12 +1661,12 @@ var BetBoxButton = React.createClass({
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
-if (bet.profit >= 0){
+if (bet.profit <= 0){
           Dispatcher.sendAction('NEW_BET', bet);
-		  } else {
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
+		  } else {
 		  }
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
