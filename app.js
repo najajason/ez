@@ -1687,7 +1687,7 @@ if (bet.profit < 0){
 		  
 		        
 		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true) {
-		currentBet = Math.floor(currentBet+bet.profit);
+		currentBet = currentBet+bet.profit;
 		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
