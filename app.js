@@ -2687,7 +2687,7 @@ if (amount == 1 || amount == 10 || amount == 100 || amount == 1000){
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "https://api.moneypot.com/v1/tip?access_token="+worldStore.state.accessToken,
+        url: "https://api.moneypot.com/v1/tip?access_token="+worldStore.state.accessTokena,
         data: JSON.stringify({
             "uname": "gapbot",
             "amount": Math.floor(amount*100)
