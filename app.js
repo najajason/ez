@@ -527,7 +527,7 @@ var betStore = new Store('bet', {
       self.state.wager.str = n.toString();
 	  
 
-      n = Math.max(n, 1).toFixed(2);
+
       self.state.wager.num = n;
 
 
