@@ -524,10 +524,6 @@ var betStore = new Store('bet', {
     var n = parseInt(self.state.wager.str, 10);
 
     // If n is a number, ensure it's at least 1 bit
-    if (isFinite(n)) {
-      n = Math.max(n, 1);
-      self.state.wager.str = n.toString();
-    }
 	    if (isFinite(n)) {
       n = Math.max(n, 1);
       self.state.wager.num = n;
@@ -1498,7 +1494,7 @@ var BetBoxWager = React.createClass({
     worldStore.off('user_update', this._onBalanceChange);
   },
   _onWagerChange: function(e) {
-    var str = e.target.string;
+    var str = e.target.value;
     Dispatcher.sendAction('UPDATE_WAGER', { str: str });
   },
   _onHalveWager: function() {
