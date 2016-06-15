@@ -33,7 +33,7 @@ var config = {
   // - For your faucet to work, you must register your site at Recaptcha
   // - https://www.google.com/recaptcha/intro/index.html
   recaptcha_sitekey: '6LfCZyATAAAAADvQosXI8YCemiHTR1rtBG30lswx',  // <----- EDIT ME!
-  redirect_uri: 'http://www.btcbot.pw/Test',
+  redirect_uri: 'http://www.bustapot.pw',
   mp_browser_uri: 'https://www.moneypot.com',
   mp_api_uri: 'https://api.moneypot.com',
   chat_uri: 'https://socket.moneypot.com',
@@ -402,7 +402,7 @@ if (helpers.getHashParams().access_token) {
 
 // Scrub fragment params from url.
 if (window.history && window.history.replaceState) {
-  window.history.replaceState({}, window.location.href, "http://www.btcbot.pw/Test");
+  window.history.replaceState({}, window.location.href, "http://www.bustapot.pw/");
 } else {
   // For browsers that don't support html5 history api, just do it the old
   // fashioned way that leaves a trailing '#' in the url
