@@ -1655,9 +1655,16 @@ var BetBoxButton = React.createClass({
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
+		  
 		  lastbet = bet
 if (bet.profit < 0){
+if (totalmultiplier == 1.01){
+		  bet.totalprofit = 0;
+}
           Dispatcher.sendAction('NEW_BET', bet);
+		  bet.totalprofit = 0;
+		  } else {
+		  bet.totalprofit = bet.totalprofit+bet.profit;
 		  }
 
           // Update next bet hash
@@ -2086,7 +2093,7 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10((bet.wager/100)*(bet.busted-0.99), -2) :
+                  '+' + helpers.round10(bet.totalprofit), -2) :
                   "-"+helpers.round10((bet.wager/100)/(bet.busted-0.01)),
                 ' bits'
               )
