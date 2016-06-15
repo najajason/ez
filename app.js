@@ -1628,6 +1628,9 @@ var BetBoxButton = React.createClass({
 	  var wincondition = Math.pow(2,32)
  if (currentMultiplier == 1.01){
  currentBet = betStore.state.wager.num*100;
+ if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  };
  }
 
  
