@@ -1673,7 +1673,9 @@ if (bet.profit <= 0){
 
 
 
-		  
+		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  };
 
 		  
 
@@ -1901,8 +1903,12 @@ var BetBox = React.createClass({
           el.div(
             {className: 'row'},
             el.div(
-              {className: 'col-xs-12'},
+              {className: 'col-xs-6'},
               React.createElement(BetBoxWager, null)
+            ),
+			 el.div(
+              {className: 'col-xs-6'},
+              React.createElement(StopAt, null)
             ),
             el.div(
             ),
