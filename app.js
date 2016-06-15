@@ -532,7 +532,7 @@ var betStore = new Store('bet', {
     // Ensure wagerString is a number
       // wagerString is valid
       self.state.wager.error = null;
-      self.state.wager.str = n.toString();
+      self.state.wager.str = newWager.toString();
 
 
     self.emitter.emit('change', self.state);
