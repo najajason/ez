@@ -1657,13 +1657,8 @@ var BetBoxButton = React.createClass({
 		  bet.busted = totalmultiplier-0.01;
 		  
 if (bet.profit < 0){
-bet.totalprofit = 0;
           Dispatcher.sendAction('NEW_BET', bet);
-		  
-		  } else {
-		  bet.totalprofit = bet.totalprofit+bet.profit;
 		  }
-lastbet = bet
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
 ;
@@ -2090,7 +2085,7 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10(bet.totalprofit, -2) :
+                  '+' + helpers.round10(((bet.wager/100)/(bet.busted-0.01))*bet.busted, -2) :
                   "-"+helpers.round10((bet.wager/100)/(bet.busted-0.01)),
                 ' bits'
               )
