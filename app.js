@@ -1774,7 +1774,7 @@ if (bet.profit <= 0){
 				onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              (totalmultiplier-0.01).toFixed(2)+"X "+ (totalmultiplier-0.01*(bet.wager/100)/(bet.busted-0.01))+" bits"
+              (totalmultiplier-0.01).toFixed(2)+"X "+ (totalmultiplier-0.01*betStore.state.wager.num)+" bits"
             )
           );
         
