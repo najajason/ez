@@ -524,7 +524,6 @@ var betStore = new Store('bet', {
     var n = parseFloat(self.state.wager.str).toFixed(2);
 
     // If n is a number, ensure it's at least 1 bit
-      n = Math.max(n, 1).toFixed(2);
       self.state.wager.str = n.toString();
 	  
 
