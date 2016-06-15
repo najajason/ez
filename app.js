@@ -1654,7 +1654,7 @@ var BetBoxButton = React.createClass({
           // Sync up with the bets we get from socket
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
-		  bet.busted = totalmultiplier;
+		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet
 if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
@@ -1686,7 +1686,7 @@ if (bet.profit < 0){
 		        
 		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true) {
 		currentBet = Math.floor(currentBet+bet.profit);
-		plusbits = Math.floor(totalmultiplier)/100
+		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		}
