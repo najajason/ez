@@ -1656,7 +1656,6 @@ var BetBoxButton = React.createClass({
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
 		  
-		  lastbet = bet
 if (bet.profit < 0){
 bet.totalprofit = 0;
           Dispatcher.sendAction('NEW_BET', bet);
@@ -1664,7 +1663,7 @@ bet.totalprofit = 0;
 		  } else {
 		  bet.totalprofit = bet.totalprofit+bet.profit;
 		  }
-
+lastbet = bet
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
 ;
