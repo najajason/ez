@@ -521,9 +521,13 @@ var betStore = new Store('bet', {
   Dispatcher.registerCallback('UPDATE_WAGER', function(newWager) {
     self.state.wager = _.merge({}, self.state.wager, newWager);
 
-    var n = parseInt(self.state.wager.str, 10);
+    var n = parseInt(self.state.wager.str);
 
     // If n is a number, ensure it's at least 1 bit
+    if (isFinite(n)) {
+      n = Math.max(n, 1);
+      self.state.wager.str = n.toString();
+    }
 	    if (isFinite(n)) {
       n = Math.max(n, 1);
       self.state.wager.num = n;
@@ -532,7 +536,7 @@ var betStore = new Store('bet', {
     // Ensure wagerString is a number
       // wagerString is valid
       self.state.wager.error = null;
-      self.state.wager.str = newWager.toString();
+      self.state.wager.str = n.toString();
 
 
     self.emitter.emit('change', self.state);
