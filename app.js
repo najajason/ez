@@ -2086,8 +2086,8 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10((bet.wager/100)-0.99, -4) :
-                  helpers.round10((bet.wager/100)/(bet.busted-0.01)),
+                  '+' + helpers.round10((bet.wager/100)*0.01, -4) :
+                  "-"+helpers.round10((bet.wager/100)/(bet.busted-0.01)),
                 ' bits'
               )
             );
