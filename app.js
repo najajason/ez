@@ -1658,11 +1658,9 @@ var BetBoxButton = React.createClass({
 		  
 		  lastbet = bet
 if (bet.profit < 0){
-if (totalmultiplier == 1.01){
-		  bet.totalprofit = 0;
-}
+bet.totalprofit = 0;
           Dispatcher.sendAction('NEW_BET', bet);
-		  bet.totalprofit = 0;
+		  
 		  } else {
 		  bet.totalprofit = bet.totalprofit+bet.profit;
 		  }
