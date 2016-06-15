@@ -1284,7 +1284,7 @@ var StopAt = React.createClass({
         el.strong(
           // If wagerError, make the label red
           betStore.state.wager.error ? { style: {color: 'black'} } : null,
-          'Stop at:')
+          'AutoCashout:')
       ),
       el.div(
         {className: 'input-group'},
@@ -1299,7 +1299,7 @@ var StopAt = React.createClass({
         ),
         el.span(
           {className: 'input-group-addon'},
-          'Bits'
+          'X'
         )
       )
     );
