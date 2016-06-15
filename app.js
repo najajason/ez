@@ -1498,7 +1498,7 @@ var BetBoxWager = React.createClass({
     worldStore.off('user_update', this._onBalanceChange);
   },
   _onWagerChange: function(e) {
-    var str = e.target.value;
+    var str = e.target.string;
     Dispatcher.sendAction('UPDATE_WAGER', { str: str });
   },
   _onHalveWager: function() {
