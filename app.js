@@ -1628,6 +1628,9 @@ var BetBoxButton = React.createClass({
  if (currentMultiplier == 1.01){
  currentBet = betStore.state.wager.num*100;
  }
+ if (worldStore.state.user.balance < currentBet){
+ return
+ }
  
       var params = {
         wager: currentBet,
