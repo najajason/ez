@@ -1776,7 +1776,7 @@ bet.totalprofit = 0;
 				onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              (totalmultiplier-0.01).toFixed(2)+"X"
+              (totalmultiplier-0.02).toFixed(2)+"X"
             )
           );
         
