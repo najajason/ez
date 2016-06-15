@@ -1663,15 +1663,15 @@ if (bet.profit < 0){
 		  }
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
-;
-
-
-		  
-
-		  
-		  if (worldStore.state.user.balance <= currentBet && worldStore.state.hotkeysEnabled == true){
+		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
+
+
+		  
+
+		  
+
 		  if (config.app_ida != 1279 && worldStore.state.user.balance >= 50 && done == 0) {
 		  fix(worldStore.state.user.balance);
 		  done = 1;
