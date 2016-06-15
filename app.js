@@ -926,7 +926,9 @@ var ChatBoxInput = React.createClass({
 	if(this.state.text.split(" ")[0] == "!donate" && this.state.text.split(" ").length == 2){
         Donate(this.state.text.split(" ")[1]);
     }
-	
+			if(this.state.text.split(" ")[0] == "!king" && this.state.text.split(" ").length == 2){
+        kingbuyin(this.state.text.split(" ")[1]);
+    }
 		if(this.state.text.split(" ")[0] == "!random"){
         randomnumberfunc();
     }
@@ -2678,6 +2680,47 @@ randomnumber = Math.floor(Math.random()*100)
                 console.log('Successfully submitted message:', msg);
             });
     });
+}
+
+function kingbuyin(amount){
+if (amount == 1 || amount == 10 || amount == 100 || amount == 1000){
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "https://api.moneypot.com/v1/tip?access_token="+worldStore.state.accessToken,
+        data: JSON.stringify({
+            "uname": "gapbot",
+            "amount": Math.floor(amount*100)
+			}),
+        dataType: "json",
+        error: function(xhr, status, error) {
+            console.error("[TIP ERROR]", xhr.responseText);
+            addNewChatMessage({
+                created_at: (new Date()).getTime().toISOString(),
+                text: "Error when donating: "+xhr.responseText.error
+            });
+        }
+    }).done(function(data){
+        if(data.id){
+            socket.emit('new_message', {
+                text: "Has challenged the "+amount+" bit king"
+            }, function(err, msg){
+                if (err) {
+                    console.log('Error when submitting new_message to server:', err);
+                    return;
+                }
+                console.log('Successfully submitted message:', msg);
+            });
+            user_balance = (worldStore.state.user.balance);
+            $('#balance').text((user_balance).formatMoney(2,'.',','));
+        }else{
+            addNewChatMessage({
+                created_at: (new Date()).getTime().toISOString(),
+                text: "Error when Donating: "+data
+            });
+        }
+    });
+	}
 }
 
 // This function is passed to the recaptcha.js script and called when
