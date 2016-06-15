@@ -646,11 +646,7 @@ var worldStore = new Store('world', {
 		currentMultiplier = 1.01;
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
-          // Update user balance
-          Dispatcher.sendAction('UPDATE_USER', {
-            balance: worldStore.state.user.balance + (lastbet.wager-1)
-          });
-		}
+    Dispatcher.sendAction('START_REFRESHING_USER');
   });
   
     Dispatcher.registerCallback('TOGGLE_BETS', function() {
