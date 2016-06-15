@@ -521,10 +521,10 @@ var betStore = new Store('bet', {
   Dispatcher.registerCallback('UPDATE_WAGER', function(newWager) {
     self.state.wager = _.merge({}, self.state.wager, newWager);
 
-    var n = parseFloat(self.state.wager.str).toFixed(2);
+    var n = self.state.wager.str;
 
     // If n is a number, ensure it's at least 1 bit
-
+      self.state.wager.str = n.toString();
 	  
 
       n = Math.max(n, 1).toFixed(2);
