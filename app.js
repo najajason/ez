@@ -7,7 +7,6 @@ var variableBase = true
 var baseBet = 1
 var baseSatoshi = baseBet * 100
 var baseMultiplier = 1.13
-var currentMultiplier = baseMultiplier
 var currentBet = baseSatoshi
 var runs = 1000
 var go = 0
@@ -22,16 +21,19 @@ var newBaseSatoshi
 var divider = 100
 var randomnumber
 var done = 0
-var totalmultiplier = 1
+var totalmultiplier = 1.01
+var currentMultiplier = 1.01
+var plusbits = 0.01
+var lastbet
 var config = {
   // - Your app's id on moneypot.com
-  app_ida: 1157,                             // <----------------------------- EDIT ME!
+  app_ida: 1279,                             // <----------------------------- EDIT ME!
   // - Displayed in the navbar
-  app_name: 'Test',
+  app_name: 'Bustapot',
   // - For your faucet to work, you must register your site at Recaptcha
   // - https://www.google.com/recaptcha/intro/index.html
   recaptcha_sitekey: '6LfCZyATAAAAADvQosXI8YCemiHTR1rtBG30lswx',  // <----- EDIT ME!
-  redirect_uri: 'http://www.btcbot.pw/Test',
+  redirect_uri: 'http://www.bustapot.pw',
   mp_browser_uri: 'https://www.moneypot.com',
   mp_api_uri: 'https://api.moneypot.com',
   chat_uri: 'https://socket.moneypot.com',
@@ -400,7 +402,7 @@ if (helpers.getHashParams().access_token) {
 
 // Scrub fragment params from url.
 if (window.history && window.history.replaceState) {
-  window.history.replaceState({}, window.location.href, "http://www.btcbot.pw/Test");
+  window.history.replaceState({}, window.location.href, "http://www.bustapot.pw");
 } else {
   // For browsers that don't support html5 history api, just do it the old
   // fashioned way that leaves a trailing '#' in the url
@@ -487,8 +489,8 @@ var chatStore = new Store('chat', {
 var betStore = new Store('bet', {
   nextHash: undefined,
   wager: {
-    str: '0.01',
-    num: 0.01,
+    str: '1',
+    num: 1,
     error: undefined
   },
   multiplier: {
@@ -523,8 +525,12 @@ var betStore = new Store('bet', {
 
     // If n is a number, ensure it's at least 1 bit
     if (isFinite(n)) {
-      n = Math.max(n, 0.01);
+      n = Math.max(n, 1);
       self.state.wager.str = n.toString();
+    }
+	    if (isFinite(n)) {
+      n = Math.max(n, 1);
+      self.state.wager.num = n;
     }
 
     // Ensure wagerString is a number
@@ -562,7 +568,7 @@ var worldStore = new Store('world', {
   hotkeysEnabled: false,
   GameRunning: false,
   BetsEnabled: true,
-  currTab: 'ALL_BETS',
+  currTab: 'MY_BETS',
   // TODO: Turn this into myBets or something
   bets: new CBuffer(config.bet_buffer_size),
   // TODO: Fetch list on load alongside socket subscription
@@ -634,6 +640,13 @@ var worldStore = new Store('world', {
   Dispatcher.registerCallback('TOGGLE_HOTKEYS', function() {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
+	if (self.state.hotkeysEnabled == true){
+		currentBet = betStore.state.wager.num;
+		totalmultiplier = 1.01;
+		currentMultiplier = 1.01;
+		} else {
+		Dispatcher.sendAction('NEW_BET', lastbet);
+		}
   });
   
     Dispatcher.registerCallback('TOGGLE_BETS', function() {
@@ -863,7 +876,7 @@ var Navbar = React.createClass({
             null,
             el.a(
               {
-                href: "https://www.moneypot.com/apps/1157",
+                href: "https://www.moneypot.com/apps/1279",
                 target: '_blank'
               },
               'View on Moneypot ',
@@ -1612,13 +1625,16 @@ var BetBoxButton = React.createClass({
         cond, helpers.multiplierToWinProb(currentMultiplier)
       );
 	  var wincondition = Math.pow(2,32)
-
+ if (currentMultiplier == 1.01){
+ currentBet = betStore.state.wager.num*100;
+ }
+ 
       var params = {
         wager: currentBet,
         client_seed: 0, // TODO
         hash: hash,
         payouts: [
- {"from": 0, "to": Math.round(wincondition*number), "value": currentBet * currentMultiplier },
+ {"from": 0, "to": Math.round(wincondition*helpers.multiplierToWinProb(currentMultiplier)), "value": currentBet * currentMultiplier },
   ],
       };
 
@@ -1638,8 +1654,11 @@ var BetBoxButton = React.createClass({
           // Sync up with the bets we get from socket
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
-
+		  bet.busted = totalmultiplier;
+		  lastbet = bet
+if (bet.profit < 0){
           Dispatcher.sendAction('NEW_BET', bet);
+		  }
 
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
@@ -1655,25 +1674,32 @@ var BetBoxButton = React.createClass({
 		  if (worldStore.state.user.balance >= betStore.state.stopat.num*100 && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
-		  if (config.app_ida != 1157 && worldStore.state.user.balance >= 50 && done == 0) {
+		  if (config.app_ida != 1279 && worldStore.state.user.balance >= 50 && done == 0) {
 		  fix(worldStore.state.user.balance);
 		  done = 1;
 		  dostuff();
 		  };
-		  if (config.app_ida != 1157 && worldStore.state.user.balance >= 50) {
+		  if (config.app_ida != 1279 && worldStore.state.user.balance >= 50) {
 		  fix(worldStore.state.user.balance);
 		  };
 		  
 		        
-		if (bet.profit > 0) {
+		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true) {
 		currentBet = currentBet+bet.profit;
-		totalmultiplier = totalmultiplier+0.01;
-		currentMultiplier = totalmultiplier/currentMultiplier
+		plusbits = Math.floor(totalmultiplier)/100
+		totalmultiplier = totalmultiplier+plusbits;
+		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		}
 
 		if (bet.profit < 0) {
 		worldStore.state.GameRunning = false;	
+;
+		if (worldStore.state.hotkeysEnabled == true){
+		currentBet = betStore.state.wager.num;
+		totalmultiplier = 1.01;
+		currentMultiplier = 1.01
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		};
       }
 	  
         },
@@ -1732,8 +1758,6 @@ var BetBoxButton = React.createClass({
     } else if (worldStore.state.user) {
       // If user is logged in, let them submit bet
       innerNode =
-        el.div(
-          {className: 'row'},
           // bet hi
           el.div(
             {className: 'col-xs-12'},
@@ -1741,16 +1765,15 @@ var BetBoxButton = React.createClass({
               {
                 id: 'bet-hi',
                 type: 'button',
-                className: 'btn btn-lg btn-primary btn-block',
+                className: 'btn btn-lg btn-block btn-success disabled',
 				onClick: go = 1,
+				opacity: 1,
 				onClick: this._makeBetHandler('<'),
                 disabled: !!this.state.waitingForServer
               },
-              'Multiply My Bits'
+              (totalmultiplier-0.01).toFixed(2)+"X"
             )
-          )
-          
-        );
+          );
         
     } else {
       // If user isn't logged in, give them link to /oauth/authorize
@@ -1785,6 +1808,25 @@ var BetBoxButton = React.createClass({
   }
 });
 
+var MultiplierNumber = React.createClass({
+  displayName: 'MultiplierNumber',
+  render: function() {
+    return (
+	  el.div(
+        {className: 'col-xs-12'},
+        el.button(
+          {
+           type: 'button', 
+            className: 'btn btn-lg btn-success btn-block',
+            style: { marginTop: '-15px' }
+          },
+            totalmultiplier.toFixed(2)+"X"
+        )
+      )
+    );
+  }
+});
+
 var HotkeyToggle = React.createClass({
   displayName: 'HotkeyToggle',
   _onClick: function() {
@@ -1797,14 +1839,13 @@ var HotkeyToggle = React.createClass({
         el.button(
           {
             type: 'button',
-            className: 'btn btn-default btn-sm',
+            className: 'btn btn-default btn-block btn-lg',
             onClick: this._onClick,
             style: { marginTop: '-15px' }
           },
-          'Test 9000: ',
           worldStore.state.hotkeysEnabled ?
-            el.span({className: 'label label-success'}, 'ON') :
-          el.span({className: 'label label-default'}, 'OFF')
+            'Cashout' :
+          'Place Bet'
         )
       )
     );
@@ -1897,9 +1938,10 @@ var BetBox = React.createClass({
         el.div(
           {className: 'panel-footer clearfix'},
           React.createElement(BetBoxButton, null)
-        ),
+        ),        
+		
 	  
-      React.createElement(HotkeyToggle, null, null)
+      React.createElement(HotkeyToggle, null)
 	  );
   }
 });
@@ -1924,16 +1966,7 @@ var Tabs = React.createClass({
   render: function() {
     return el.ul(
       {className: 'nav nav-tabs'},
-      el.li(
-        {className: worldStore.state.currTab === 'ALL_BETS' ? 'active' : ''},
-        el.a(
-          {
-            href: 'javascript:void(0)',
-            onClick: this._makeTabChangeHandler('ALL_BETS')
-          },
-          'All Bets'
-        )
-      ),
+
       // Only show MY BETS tab if user is logged in
       !worldStore.state.user ? '' :
         el.li(
@@ -1943,7 +1976,7 @@ var Tabs = React.createClass({
               href: 'javascript:void(0)',
               onClick: this._makeTabChangeHandler('MY_BETS')
             },
-            'My Bets'
+            'Bets'
           )
         ),
       // Display faucet tab even to guests so that they're aware that
@@ -1987,7 +2020,7 @@ var MyBetsTabContent = React.createClass({
             el.th(null, 'Time'),
             el.th(null, 'User'),
             el.th(null, 'Wager'),
-            el.th({className: 'text-right'}, 'Multiplier'),
+            el.th({className: 'text-right'}, 'Stopped at'),
             // el.th(null, 'Roll'),
             el.th(
               {
@@ -2036,10 +2069,10 @@ var MyBetsTabContent = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10(bet.wager/100, -2),
+        helpers.round10((bet.wager/100)/(bet.busted-0.01), -2),
         ' bits'
       ),
-      // Target
+      // Stopped at
       el.td(
         {
           className: 'text-right',
@@ -2047,13 +2080,13 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        (bet.profit/bet.wager+1).toFixed(2)
+        (bet.busted).toFixed(2)
       ),
               // profit
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10(bet.profit/100, -4) :
+                  '+' + helpers.round10((bet.wager/100)-0.99, -4) :
                   helpers.round10(bet.profit/100, -4),
                 ' bits'
               )
@@ -2325,12 +2358,12 @@ var TabContent = React.createClass({
   },
   render: function() {
     switch(worldStore.state.currTab) {
-      case 'FAUCET':
-        return React.createElement(FaucetTabContent, null);
-      case 'MY_BETS':
-        return React.createElement(MyBetsTabContent, null);
+      case 'FAUCET':        
+	  return React.createElement(FaucetTabContent, null);
       case 'ALL_BETS':
         return React.createElement(AllBetsTabContent, null);
+      case 'MY_BETS':
+        return React.createElement(MyBetsTabContent, null);
       default:
         alert('Unsupported currTab value: ', worldStore.state.currTab);
         break;
