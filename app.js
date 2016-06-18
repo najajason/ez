@@ -2384,12 +2384,12 @@ var Footer = React.createClass({
           marginTop: '200px'
         }
       },
-      'Powered by ',
+      'Join our ',
       el.a(
         {
-          href: 'https://www.moneypot.com'
+          href: 'https://discord.gg/011aeZCV0eligRzoQ'
         },
-        'Moneypot'
+        'Discord'
       )
     );
   }
