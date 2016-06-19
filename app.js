@@ -27,6 +27,7 @@ var plusbits = 0.01
 var lastbet
 var stopped = 1
 var stopatstopped = 0
+var continueafterdeath = 1
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -1701,7 +1702,12 @@ if (bet.profit <= 0){
 		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
-		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0){
+		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
+		if (continueafterdeath == 0){
+		currentBet = betStore.state.wager.num;
+		stopped = 1;
+		Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		}
 		currentBet = 1
 		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
@@ -1709,7 +1715,7 @@ if (bet.profit <= 0){
 		}
 
 		if (bet.profit < 0) {
-		if (worldStore.state.hotkeysEnabled == true && stopped == 0){
+		if (worldStore.state.hotkeysEnabled == true && stopped == 0 ){
 		currentBet = betStore.state.wager.num;
 
 		stopped = 1;
