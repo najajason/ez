@@ -61,7 +61,7 @@ var config = {
 if (worldStore.state.hotkeysEnabled) {
     $('#bet-hi').click();
 };
-}, 250);
+}, 100);
   if (config.house_edge <= 0.0) {
     errString = 'House edge must be > 0.0 (0%)';
   } else if (config.house_edge >= 100.0) {
