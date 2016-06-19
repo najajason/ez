@@ -1715,6 +1715,7 @@ if (bet.profit <= 0){
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
 		stopped = 1;
+		worldStore.state.hotkeysEnabled = false;
 		} else {
 		currentBet = 1
 		plusbits = Math.floor(totalmultiplier-0.01)/100
