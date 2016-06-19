@@ -1715,7 +1715,6 @@ if (bet.profit <= 0){
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
 		stopped = 1;
-		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		}
 		currentBet = 1
 		plusbits = Math.floor(totalmultiplier-0.01)/100
