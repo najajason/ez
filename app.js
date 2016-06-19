@@ -653,6 +653,15 @@ var worldStore = new Store('world', {
 		}
   });
   
+    Dispatcher.registerCallback('TOGGLE_CONTINUE', function() {
+    self.emitter.emit('change', self.state);
+	if (continueafterdeath == 1){
+continueafterdeath = 0;
+		} else {
+continueafterdeath = 1;
+		}
+  });
+  
     Dispatcher.registerCallback('TOGGLE_BETS', function() {
     self.state.BetsEnabled = !self.state.BetsEnabled;
     self.emitter.emit('change', self.state);
@@ -1873,6 +1882,30 @@ var HotkeyToggle = React.createClass({
   }
 });
 
+var ContinueToggle = React.createClass({
+  displayName: 'ContinueToggle',
+  _onClick: function() {
+    Dispatcher.sendAction('TOGGLE_CONTINUE');
+  },
+  render: function() {
+    return (
+      el.div(
+        {className: 'text-center'},
+        el.button(
+          {
+            type: 'button',
+            className: 'btn btn-default btn-sm',
+            onClick: this._onClick,
+            style: { marginTop: '-15px' }
+          },
+          'Continue after cashout: ',
+          continueafterdeath == 1 ?
+            el.span({className: 'label label-success'}, 'ON') :
+          el.span({className: 'label label-default'}, 'OFF')
+        )
+      )
+    );
+	
 var BetToggle = React.createClass({
   displayName: 'betToggle',
     _onClick: function() {
@@ -1966,7 +1999,8 @@ var BetBox = React.createClass({
         ),        
 		
 	  
-      React.createElement(HotkeyToggle, null)
+      React.createElement(HotkeyToggle, null),
+      React.createElement(ContinueToggle, null)
 	  );
   }
 });
