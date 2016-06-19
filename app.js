@@ -26,6 +26,7 @@ var currentMultiplier = 1.01
 var plusbits = 0.01
 var lastbet
 var stopped = 1
+var stopatstopped = 0
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -644,6 +645,7 @@ var worldStore = new Store('world', {
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
 		stopped = 0;
+		stopatstopped = 0;
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		    Dispatcher.sendAction('START_REFRESHING_USER');
@@ -1677,8 +1679,8 @@ if (bet.profit <= 0){
 
 
 
-		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
-		  stopped = 1;
+		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0 && stopatstopped = 0;){
+		  stopatstopped = 1;
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
 
