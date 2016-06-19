@@ -642,9 +642,7 @@ var worldStore = new Store('world', {
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
-		stopped = 0;
 		} else {
-		stopped = 1;
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		    Dispatcher.sendAction('START_REFRESHING_USER');
 		}
