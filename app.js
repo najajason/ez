@@ -1872,7 +1872,7 @@ var HotkeyToggle = React.createClass({
             className: 'btn btn-default btn-block btn-lg',
             onClick: this._onClick,
             style: { marginTop: '-15px' },
-		  disabled: (stopped == 0 && worldStore.state.hotkeysEnabled == false)
+		  disabled: (stopped == 0 && worldStore.state.hotkeysEnabled == false && continueafterdeath == 1)
           },
           worldStore.state.hotkeysEnabled ?
             'Cashout: '+ ((totalmultiplier-0.01)*betStore.state.wager.num).toFixed(2)+" bits" :
