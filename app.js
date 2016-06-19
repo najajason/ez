@@ -1715,11 +1715,12 @@ if (bet.profit <= 0){
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
 		stopped = 1;
-		}
+		} else {
 		currentBet = 1
 		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
+		}
 		}
 
 		if (bet.profit < 0) {
