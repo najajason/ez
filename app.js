@@ -1709,14 +1709,12 @@ if (bet.profit <= 0){
 		if (bet.profit < 0) {
 		if (worldStore.state.hotkeysEnabled == true && stopped == 0){
 		currentBet = betStore.state.wager.num;
-		totalmultiplier = 1.01;
-		currentMultiplier = 1.01
+
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		} else{
 		currentBet = betStore.state.wager.num;
-		totalmultiplier = 1.01;
-		currentMultiplier = 1.01
+
 		stopped = 1;
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
