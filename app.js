@@ -2001,8 +2001,9 @@ var BetBox = React.createClass({
           React.createElement(BetBoxButton, null)
         ),        
 		
-	  
+	  {className: 'panel-footer clearfix'},
       React.createElement(HotkeyToggle, null),
+	  {className: 'row'},
       React.createElement(ContinueToggle, null)
 	  );
   }
