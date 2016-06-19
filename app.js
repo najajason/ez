@@ -1718,7 +1718,6 @@ if (bet.profit <= 0){
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01
 		stopped = 1;
-		Dispatcher.sendAction('NEW_BET', lastbet);
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
       }
