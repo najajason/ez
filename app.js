@@ -1679,7 +1679,7 @@ if (bet.profit <= 0){
 
 
 
-		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0 && stopatstopped = 0;){
+		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0 && stopatstopped == 0){
 		  stopatstopped = 1;
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
