@@ -1905,7 +1905,9 @@ var ContinueToggle = React.createClass({
         )
       )
     );
-	
+  }
+});
+
 var BetToggle = React.createClass({
   displayName: 'betToggle',
     _onClick: function() {
