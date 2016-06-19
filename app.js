@@ -1852,12 +1852,9 @@ var HotkeyToggle = React.createClass({
         {className: 'text-center'},
         el.button(
           {
+		  disabled: stopped == 0
             type: 'button',
-			if (stopped == 1){
             className: 'btn btn-default btn-block btn-lg',
-			} else {
-			className: 'btn btn-default btn-block btn-lg disabled',
-			}
             onClick: this._onClick,
             style: { marginTop: '-15px' }
           },
