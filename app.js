@@ -25,6 +25,7 @@ var totalmultiplier = 1.01
 var currentMultiplier = 1.01
 var plusbits = 0.01
 var lastbet
+var stopped = 1
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -58,7 +59,7 @@ var config = {
 (function() {
   var errString;
 	setInterval(function(){
-if (worldStore.state.hotkeysEnabled) {
+if (stopped == 0) {
     $('#bet-hi').click();
 };
 }, 100);
@@ -642,6 +643,7 @@ var worldStore = new Store('world', {
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
+		stopped = 0;
 		} else {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		    Dispatcher.sendAction('START_REFRESHING_USER');
@@ -1630,6 +1632,7 @@ var BetBoxButton = React.createClass({
  currentBet = betStore.state.wager.num*100;
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  stopped = 1;
 		  };
  }
 
@@ -1665,6 +1668,7 @@ if (bet.profit <= 0){
           Dispatcher.sendAction('NEW_BET', bet);
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  stopped = 1;
 		  };
 		  } else {
 		  }
@@ -1674,6 +1678,7 @@ if (bet.profit <= 0){
 
 
 		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0){
+		  stopped = 1;
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  };
 
@@ -1689,8 +1694,13 @@ if (bet.profit <= 0){
 		  };
 		  
 		        
-		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true) {
+		if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == true && stopped == 0) {
 		currentBet = currentBet+bet.profit;
+		plusbits = Math.floor(totalmultiplier-0.01)/100
+		totalmultiplier = totalmultiplier+plusbits;
+		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
+		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0){
+		currentBet = 0.01
 		plusbits = Math.floor(totalmultiplier-0.01)/100
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
