@@ -2525,7 +2525,6 @@ if (!worldStore.state.accessTokena) {
   // Fetch latest all-bets to populate the all-bets tab
   MoneyPot.listBets({
     success: function(bets) {
-      console.log('[MoneyPot.listBets]:', bets);
       Dispatcher.sendAction('INIT_ALL_BETS', bets.reverse());
     },
     error: function(err) {
@@ -2584,7 +2583,6 @@ function connectToChatServer() {
     });
 
     socket.on('new_bet', function(bet) {
-      console.log('[socket] New bet:', bet);
 
       // Ignore bets that aren't of kind "simple_dice".
       if (bet.kind !== 'custom') {
