@@ -1869,7 +1869,7 @@ var HotkeyToggle = React.createClass({
         el.button(
           {
             type: 'button',
-            className: 'btn btn-lg btn-default btn-block',
+            className: 'btn btn-lg btn-info btn-block',
             onClick: this._onClick,
             style: { marginTop: '-15px' },
 		  disabled: (stopped == 0 && worldStore.state.hotkeysEnabled == false && continueafterdeath == 1)
