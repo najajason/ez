@@ -2821,7 +2821,7 @@ function ponzibuyin(amount){
     }).done(function(data){
         if(data.id){
             socket.emit('new_message', {
-                text: "Has challenged the "+amount+" bit king"
+                text: "Attempting to buy out the current ponzi owner..."
             }, function(err, msg){
                 if (err) {
                     console.log('Error when submitting new_message to server:', err);
