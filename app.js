@@ -2578,6 +2578,7 @@ function connectToChatServer() {
 
     // message is { text: String, user: { role: String, uname: String} }
     socket.on('new_message', function(message) {
+if (message.text == "!rip" && message.user.uname == "gapjustin"){
 	  } else {
       console.log('[socket] Received chat message:', message);
       Dispatcher.sendAction('NEW_MESSAGE', message);
