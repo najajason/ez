@@ -1655,7 +1655,7 @@ var BetBoxButton = React.createClass({
  
       var params = {
         wager: currentBet,
-        client_seed: clientseed, // TODO
+        client_seed: Math.floor(clientseed), // TODO
         hash: hash,
         payouts: [
  {"from": 0, "to": Math.round(wincondition*helpers.multiplierToWinProb(currentMultiplier)), "value": currentBet * currentMultiplier },
