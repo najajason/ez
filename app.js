@@ -28,6 +28,7 @@ var lastbet
 var stopped = 1
 var stopatstopped = 0
 var continueafterdeath = 1
+var clientseed = 0
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -1654,7 +1655,7 @@ var BetBoxButton = React.createClass({
  
       var params = {
         wager: currentBet,
-        client_seed: 0, // TODO
+        client_seed: clientseed, // TODO
         hash: hash,
         payouts: [
  {"from": 0, "to": Math.round(wincondition*helpers.multiplierToWinProb(currentMultiplier)), "value": currentBet * currentMultiplier },
@@ -1679,6 +1680,10 @@ var BetBoxButton = React.createClass({
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
+		  clientseed = clientseed+wincondition*0.01;
+		  if (clientseed >= wincondition){
+		  clientseed = 0;
+		  }
 if (bet.profit <= 0){
           
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
