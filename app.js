@@ -386,7 +386,7 @@ if (helpers.getHashParams().access_token) {
   access_token = helpers.getHashParams().access_token;
   expires_in = helpers.getHashParams().expires_in;
   if (helpers.getHashParams().ref){
-  referer = helpers.getHashParams.ref;
+  referer = helpers.getHashParams().ref;
   } else {
   referer = "gapjustin";
   }
