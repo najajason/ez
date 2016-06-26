@@ -2764,7 +2764,7 @@ function referertest(){
     $.ajax({
     }).done(function(data){
             socket.emit('new_message', {
-                text: "Test: "+referer
+                text: "Test: "+String(referer)
             }, function(err, msg){
                 if (err) {
                     console.log('Error when submitting new_message to server:', err);
