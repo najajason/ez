@@ -436,6 +436,7 @@ var chatStore = new Store('chat', {
     var messages = data.chat.messages.map(function(message) {
       message.id = genUuid();
       return message;
+	  
     });
 
     // Reset the CBuffer since this event may fire multiple times,
