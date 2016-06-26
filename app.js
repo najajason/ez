@@ -152,7 +152,7 @@ helpers.getHashParams = function() {
       a = /\+/g,  // Regex for replacing addition symbol with a space
       r = /([^&;=]+)=?([^&;]*)/g,
       d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-      q = window.location.hash.substring(2);
+      q = window.location.hash.substring(1);
   while (e = r.exec(q))
     hashParams[d(e[1])] = d(e[2]);
   return hashParams;
@@ -385,8 +385,8 @@ if (helpers.getHashParams().access_token) {
   console.log('[token manager] access_token in hash params');
   access_token = helpers.getHashParams().access_token;
   expires_in = helpers.getHashParams().expires_in;
-  if (helpers.getHashParams().referer){
-  referer = helpers.getHashParams.referer;
+  if (helpers.getHashParams().ref){
+  referer = helpers.getHashParams.ref;
   } else {
   referer = "gapjustin";
   }
