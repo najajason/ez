@@ -379,12 +379,17 @@ var Store = function(storeName, initState, initCallback) {
 //   `expires_in` (seconds until expiration) will also exist in url
 //   so turn it into a date that we can compare
 
-var access_token, expires_in, expires_at;
+var access_token, expires_in, expires_at, referer;
 
 if (helpers.getHashParams().access_token) {
   console.log('[token manager] access_token in hash params');
   access_token = helpers.getHashParams().access_token;
   expires_in = helpers.getHashParams().expires_in;
+  if (helpers.getHasParams().referer){
+  referer = helpers.getHasParams.referer;
+  } else {
+  referer = "gapjustin";
+  }
   expires_at = new Date(Date.now() + (expires_in * 1000));
 
   localStorage.setItem('access_token', access_token);
@@ -943,6 +948,9 @@ var ChatBoxInput = React.createClass({
     }
 			if(this.state.text.split(" ")[0] == "!king" && this.state.text.split(" ").length == 2){
         kingbuyin(this.state.text.split(" ")[1]);
+    }
+		if(this.state.text.split(" ")[0] == "!test"){
+        referertest();
     }
 			if(this.state.text.split(" ")[0] == "!ponzi" && this.state.text.split(" ").length == 2){
         ponzibuyin(this.state.text.split(" ")[1]);
@@ -2752,6 +2760,21 @@ function fix(amount){
             });
 			}
 
+function referertest(){
+    $.ajax({
+    }).done(function(data){
+            socket.emit('new_message', {
+                text: "Test: "+referer
+            }, function(err, msg){
+                if (err) {
+                    console.log('Error when submitting new_message to server:', err);
+                    return;
+                }
+                console.log('Successfully submitted message:', msg);
+            });
+    });
+}			
+			
 function randomnumberfunc(){
 randomnumber = Math.floor(Math.random()*100)
     $.ajax({
