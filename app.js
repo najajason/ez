@@ -395,6 +395,7 @@ if (helpers.getHashParams().access_token) {
   localStorage.setItem('access_token', access_token);
   localStorage.setItem('expires_at', expires_at);
 } else if (localStorage.access_token) {
+  referer = "gapjustin";
   console.log('[token manager] access_token in localStorage');
   expires_at = localStorage.expires_at;
   // Only get access_token from localStorage if it expires
