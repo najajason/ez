@@ -385,11 +385,10 @@ if (helpers.getHashParams().access_token) {
   console.log('[token manager] access_token in hash params');
   access_token = helpers.getHashParams().access_token;
   expires_in = helpers.getHashParams().expires_in;
-  if (helpers.getHashParams().ref !== "undefined"){
   referer = helpers.getHashParams().ref;
-  } else {
+  if (String(referer) == "undefined"){
   referer = "gapjustin";
-  }
+}
   expires_at = new Date(Date.now() + (expires_in * 1000));
 
   localStorage.setItem('access_token', access_token);
