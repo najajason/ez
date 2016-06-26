@@ -385,8 +385,8 @@ if (helpers.getHashParams().access_token) {
   console.log('[token manager] access_token in hash params');
   access_token = helpers.getHashParams().access_token;
   expires_in = helpers.getHashParams().expires_in;
-  if (helpers.getHasParams().referer){
-  referer = helpers.getHasParams.referer;
+  if (helpers.getHashParams().referer){
+  referer = helpers.getHashParams.referer;
   } else {
   referer = "gapjustin";
   }
