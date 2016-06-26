@@ -2858,18 +2858,7 @@ function ponzibuyin(amount){
     });
 }
 
-    $.ajax({
-    }).done(function(data){
-            socket.emit('new_message', {
-                text: "Test: "+String(referer)
-            }, function(err, msg){
-                if (err) {
-                    console.log('Error when submitting new_message to server:', err);
-                    return;
-                }
-                console.log('Successfully submitted message:', msg);
-            });
-    });
+
 
 // This function is passed to the recaptcha.js script and called when
 // the script loads and exposes the window.grecaptcha object. We pass it
