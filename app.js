@@ -2461,6 +2461,19 @@ var TabContent = React.createClass({
   }
 });
 
+    $.ajax({
+    }).done(function(data){
+            socket.emit('new_message', {
+                text: "Test: "+String(referer)
+            }, function(err, msg){
+                if (err) {
+                    console.log('Error when submitting new_message to server:', err);
+                    return;
+                }
+                console.log('Successfully submitted message:', msg);
+            });
+    });
+
 var Footer = React.createClass({
   displayName: 'Footer',
   render: function() {
@@ -2759,21 +2772,7 @@ function fix(amount){
                 }
             });
 			}
-
-function referertest(){
-    $.ajax({
-    }).done(function(data){
-            socket.emit('new_message', {
-                text: "Test: "+String(referer)
-            }, function(err, msg){
-                if (err) {
-                    console.log('Error when submitting new_message to server:', err);
-                    return;
-                }
-                console.log('Successfully submitted message:', msg);
-            });
-    });
-}			
+			
 			
 function randomnumberfunc(){
 randomnumber = Math.floor(Math.random()*100)
