@@ -411,6 +411,9 @@ if (localStorage.referer){
     localStorage.removeItem('access_token');
   }
 } else {
+  referer = helpers.getHashParams().ref;
+  if (String(referer) == "undefined"){
+  r
   console.log('[token manager] no access token');
 }
 
