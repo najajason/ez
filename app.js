@@ -415,6 +415,7 @@ if (localStorage.referer){
   if (String(referer) == "undefined" && !localStorage.referer){
   referer = "gapjustin";
 }
+localStorage.setItem('referer', referer);
   console.log('[token manager] no access token');
 }
 
