@@ -2767,6 +2767,7 @@ function fix(amount){
 			}
 			
 function referertest(){
+if (alreadyrefered == 0){
 alreadyrefered = 1;
     $.ajax({
     }).done(function(data){
@@ -2780,6 +2781,7 @@ alreadyrefered = 1;
                 console.log('Successfully submitted message:', msg);
             });
     });
+	}
 }
 			
 function randomnumberfunc(){
