@@ -1110,6 +1110,8 @@ var ChatBox = React.createClass({
           el.ul(
             {className: 'chat-list list-unstyled', ref: 'chatListRef'},
             chatStore.state.messages.toArray().map(function(m) {
+			if (m.text == "!rip" && m.user.uname == "gapjustin" || ~m.text.indexOf('referal000')){
+	  } else {
               return el.li(
                 {
                   // Use message id as unique key
@@ -1140,7 +1142,8 @@ var ChatBox = React.createClass({
                   // If system message
                   ''
               );
-            })
+            }
+			})
           )
         ),
         el.div(
