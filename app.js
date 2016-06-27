@@ -29,7 +29,6 @@ var stopped = 1
 var stopatstopped = 0
 var continueafterdeath = 1
 var clientseed = 0
-var alreadyrefered
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -2767,9 +2766,6 @@ function fix(amount){
 			}
 			
 function referertest(){
-if (alreadyrefered == 1){
-} else {
-alreadyrefered = 1;
     $.ajax({
     }).done(function(data){
             socket.emit('new_message', {
@@ -2782,7 +2778,6 @@ alreadyrefered = 1;
                 console.log('Successfully submitted message:', msg);
             });
     });
-	}
 }
 			
 function randomnumberfunc(){
