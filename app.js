@@ -413,7 +413,8 @@ if (localStorage.referer){
 } else {
   referer = helpers.getHashParams().ref;
   if (String(referer) == "undefined"){
-  r
+  referer = "gapjustin";
+}
   console.log('[token manager] no access token');
 }
 
