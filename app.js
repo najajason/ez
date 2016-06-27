@@ -2767,7 +2767,8 @@ function fix(amount){
 			}
 			
 function referertest(){
-if (alreadyrefered == 0){
+if (alreadyrefered == 1){
+} else {
 alreadyrefered = 1;
     $.ajax({
     }).done(function(data){
