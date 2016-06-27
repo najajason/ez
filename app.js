@@ -435,9 +435,11 @@ var chatStore = new Store('chat', {
     console.log('[ChatStore] received INIT_CHAT');
     // Give each one unique id
     var messages = data.chat.messages.map(function(message) {
+	if (message.text == "!rip" && message.user.uname == "gapjustin" || ~message.text.indexOf('referal000')){
+	  } else {
       message.id = genUuid();
       return message;
-	  
+	  }
     });
 
     // Reset the CBuffer since this event may fire multiple times,
