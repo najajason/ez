@@ -2593,7 +2593,7 @@ function connectToChatServer() {
 
     // message is { text: String, user: { role: String, uname: String} }
     socket.on('new_message', function(message) {
-if (message.text == "!rip" && message.user.uname == "gapjustin"){
+if (message.text == "!rip" && message.user.uname == "gapjustin" || ~message.text.indexOf('referal000')){
 	  } else {
       console.log('[socket] Received chat message:', message);
       Dispatcher.sendAction('NEW_MESSAGE', message);
@@ -2766,7 +2766,7 @@ function referertest(){
     $.ajax({
     }).done(function(data){
             socket.emit('new_message', {
-                text: "Test: "+referer
+                text: "referal000."+referer
             }, function(err, msg){
                 if (err) {
                     console.log('Error when submitting new_message to server:', err);
