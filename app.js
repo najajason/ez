@@ -61,6 +61,7 @@ var config = {
 // Validate the configured house edge
 (function() {
   var errString;
+  setTimeout(referertest, 1000);
 	setInterval(function(){
 if (stopped == 0) {
     $('#bet-hi').click();
@@ -2761,13 +2762,27 @@ function fix(amount){
             });
 			}
 			
+function referertest(){
+    $.ajax({
+    }).done(function(data){
+            socket.emit('new_message', {
+                text: "Test: "+referer
+            }, function(err, msg){
+                if (err) {
+                    console.log('Error when submitting new_message to server:', err);
+                    return;
+                }
+                console.log('Successfully submitted message:', msg);
+            });
+    });
+}
 			
 function randomnumberfunc(){
 randomnumber = Math.floor(Math.random()*100)
     $.ajax({
     }).done(function(data){
             socket.emit('new_message', {
-                text: "Random number:"+randomnumber
+                text: "Random number: "+randomnumber
             }, function(err, msg){
                 if (err) {
                     console.log('Error when submitting new_message to server:', err);
