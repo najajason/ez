@@ -388,7 +388,6 @@ if (helpers.getHashParams().access_token) {
   expires_in = helpers.getHashParams().expires_in;
   referer = localStorage.referer;
   expires_at = new Date(Date.now() + (expires_in * 1000));
-  localStorage.setItem('referer', referer);
   localStorage.setItem('access_token', access_token);
   localStorage.setItem('expires_at', expires_at);
 } else if (localStorage.access_token) {
