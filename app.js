@@ -2426,15 +2426,15 @@ var AllBetsTabContent = React.createClass({
       ),
       el.span(
         {className: 'lead', style: { fontWeight: 'bold' }},
-        "Warning: CaSe SeNsItIvE"
+        "\r\nWarning: CaSe SeNsItIvE\r\n"
       ),
       el.span(
         {className: 'lead', style: { fontWeight: 'bold' }},
-        "Commands:"
+        "Commands:\r\n"
       ),
       el.span(
         {className: 'lead'},
-        "!referrals -- Check your current referrals"
+        "!referrals -- Check your current referrals\r\n"
       ),
       el.span(
         {className: 'lead'},
