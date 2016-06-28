@@ -2065,7 +2065,6 @@ var Tabs = React.createClass({
   render: function() {
     return el.ul(
       {className: 'nav nav-tabs'},
-
       // Only show MY BETS tab if user is logged in
       !worldStore.state.user ? '' :
         el.li(
@@ -2090,7 +2089,17 @@ var Tabs = React.createClass({
             },
             el.span(null, 'Faucet ')
           )
+        ),
+		      el.li(
+        {className: worldStore.state.currTab === 'ALL_BETS' ? 'active' : ''},
+        el.a(
+          {
+            href: 'javascript:void(0)',
+            onClick: this._makeTabChangeHandler('ALL_BETS')
+          },
+          'Misc'
         )
+      )
     );
   }
 });
@@ -2409,38 +2418,9 @@ var AllBetsTabContent = React.createClass({
     worldStore.off('change', this._onStoreChange);
   },
   render: function() {
-    return el.div(
-      null,
-      el.table(
-        {className: 'table'},
-        el.thead(
-          null,
-          el.tr(
-            null,
-            el.th(null, 'ID'),
-            el.th(null, 'Time'),
-            el.th(null, 'User'),
-            el.th(null, 'Wager'),
-            el.th({className: 'text-right'}, 'Multiplier'),
-            // el.th(null, 'Roll'),
-            el.th(
-              {
-                style: {
-                  paddingLeft: '50px'
-                }
-              },
-              'Profit'
-            )
-          )
-        ),
-        el.tbody(
-          null,
-          worldStore.state.allBets.toArray().map(function(bet) {
-            return React.createElement(BetRow, { bet: bet, key: bet.bet_id || bet.id });
-          }).reverse()
-        )
-      )
-    );
+      return el.p(
+        el.strong( 'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE")
+      ),
   }
 });
 
