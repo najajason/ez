@@ -2420,7 +2420,7 @@ var AllBetsTabContent = React.createClass({
   render: function() {
       return el.p(
         el.strong( 'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE")
-      ),
+      )
   }
 });
 
