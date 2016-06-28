@@ -2418,14 +2418,13 @@ var AllBetsTabContent = React.createClass({
     worldStore.off('change', this._onStoreChange);
   },
   render: function() {
-      return el.div(
-	  el.p(
-        {className: 'lead'},
-        el.strong( 'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE")
+    return el.div(
+      null,
+      el.span(
+        {className: 'lead', style: { fontWeight: 'bold' }},
+        'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE"
       )
-
-  )
-    }
+    );
 });
 
 var TabContent = React.createClass({
