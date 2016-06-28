@@ -2422,7 +2422,7 @@ var AllBetsTabContent = React.createClass({
       null,
       el.span(
         {className: 'lead', style: { fontWeight: 'bold' }},
-        'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE"
+        'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" <br>Warning: CaSe SeNsItIvE<br>Commands:<br>!referrals -- Check your current referrals <br>!payout -- Get your referral money"
       )
     );
 	}
