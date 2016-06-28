@@ -2425,6 +2425,7 @@ var AllBetsTabContent = React.createClass({
         'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname+" Warning: CaSe SeNsItIvE"
       )
     );
+	}
 });
 
 var TabContent = React.createClass({
