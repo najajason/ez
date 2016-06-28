@@ -2420,22 +2420,52 @@ var AllBetsTabContent = React.createClass({
   render: function() {
     return el.div(
       null,
+                  el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'}
+              )
+            ),
       el.span(
         {className: 'lead', style: { fontWeight: 'bold' }},
         'Your referral link is: http://www.bustapot.pw/#ref='+worldStore.state.user.uname
       ),
+                  el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'}
+              )
+            ),
       el.span(
-        {className: 'lead', style: { fontWeight: 'bold' }},
+        {className: 'small'},
         "\r\nWarning: CaSe SeNsItIvE\r\n"
       ),
+                  el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'}
+              )
+            ),
       el.span(
         {className: 'lead', style: { fontWeight: 'bold' }},
         "Commands:\r\n"
       ),
+                  el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'}
+              )
+            ),
       el.span(
         {className: 'lead'},
         "!referrals -- Check your current referrals\r\n"
       ),
+                  el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'}
+              )
+            ),
       el.span(
         {className: 'lead'},
         "!payout -- Get your referral money"
