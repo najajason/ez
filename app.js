@@ -2097,7 +2097,7 @@ var Tabs = React.createClass({
             href: 'javascript:void(0)',
             onClick: this._makeTabChangeHandler('ALL_BETS')
           },
-          'Misc'
+          'Referral link'
         )
       )
     );
