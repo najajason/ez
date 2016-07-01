@@ -2103,6 +2103,11 @@ var BetBox = React.createClass({
 		el.div(
 	  {className: 'panel-footer clearfix'},
       React.createElement(HotkeyToggle, null), 
+            el.div(
+              {className: 'row'},
+              el.div(
+              )
+            ),
 	  React.createElement(HouseEdgeThingy, null)
 	  ),
 	  
