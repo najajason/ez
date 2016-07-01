@@ -1962,7 +1962,7 @@ var HouseEdgeThingy = React.createClass({
          el.div(
            {className: 'btn-group'},
           el.button(
-            {className: 'btn btn-default btn-md bot_edge',
+            {className: 'btn btn-default btn-md bot_edge disabled',
               onClick: this._donothing },
             (betStore.state.HouseEdge * 100).toFixed(1).toString() + '%'
             )
