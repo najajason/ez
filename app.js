@@ -523,6 +523,7 @@ var betStore = new Store('bet', {
     num: 0,
     error: undefined
   },
+    HouseEdge :0.01,
   // Edited for automation by https://www.moneypot.com/users/gapjustin
   hotkeysEnabled: false
 }, function() {
@@ -567,6 +568,18 @@ var betStore = new Store('bet', {
   
     Dispatcher.registerCallback('UPDATE_ACTMULT', function(newActMult) {
     self.state.actmult = _.merge({}, self.state.actmult, newActMult);
+    self.emitter.emit('change', self.state);
+  });
+    Dispatcher.registerCallback('LESS_EDGE', function(){
+    if (self.state.HouseEdge > 0.005){
+        self.state.HouseEdge -= 0.001;
+        }
+    self.emitter.emit('change', self.state);
+  });
+      Dispatcher.registerCallback('MORE_EDGE', function(){
+    if (self.state.HouseEdge < 0.999){
+        self.state.HouseEdge += 0.001;
+        }
     self.emitter.emit('change', self.state);
   });
 });
@@ -1908,6 +1921,68 @@ var HotkeyToggle = React.createClass({
   }
 });
 
+var HouseEdgeThingy = React.createClass({
+  displayName: 'HouseEdgeThingy',
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    betStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    betStore.off('change', this._onStoreChange);
+  },
+  _onClickLess: function() {
+    Dispatcher.sendAction('LESS_EDGE');
+  },
+  _onClickMore: function() {
+    Dispatcher.sendAction('MORE_EDGE');
+  },
+  _donothing: function() {
+  },
+  render: function() {
+    return (
+      el.div(
+       {className: 'btn-group'},
+       el.p(
+         {className: 'lead', style: { fontWeight: 'bold',marginTop: '-15px' }},
+           'House Edge:'
+       ),
+       el.div(
+         {className: 'btn-group btn-group-justified', style: {marginTop: '-15px'}},
+         el.div(
+           {className: 'btn-group'},
+           el.button(
+             {type: 'button',
+               className: 'btn btn-info btn-md',
+              onClick: this._onClickLess },
+             '-'
+           )
+         ),
+         el.div(
+           {className: 'btn-group'},
+          el.button(
+            {className: 'btn btn-default btn-md bot_edge',
+              onClick: this._donothing },
+            (betStore.state.house_edge * 100).toFixed(1).toString() + '%'
+            )
+          ),
+          el.div(
+            {className: 'btn-group'},
+            el.button(
+              {
+                type: 'button',
+                className: 'btn btn-primary btn-md',
+                onClick: this._onClickMore},
+              '+'
+            )
+          )
+        )
+      )
+    );
+  }
+});
+
 var ContinueToggle = React.createClass({
   displayName: 'ContinueToggle',
   _onClick: function() {
@@ -2027,8 +2102,10 @@ var BetBox = React.createClass({
         ),        
 		el.div(
 	  {className: 'panel-footer clearfix'},
-      React.createElement(HotkeyToggle, null)
+      React.createElement(HotkeyToggle, null), 
+	  React.createElement(HouseEdgeThingy, null)
 	  ),
+	  
             el.div(
               {className: 'row'},
               el.div(
