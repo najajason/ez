@@ -571,14 +571,14 @@ var betStore = new Store('bet', {
     self.emitter.emit('change', self.state);
   });
     Dispatcher.registerCallback('LESS_EDGE', function(){
-    if (self.state.HouseEdge > 0.005){
-        self.state.HouseEdge -= 0.001;
+    if (self.state.HouseEdge > 0.0005){
+        self.state.HouseEdge -= 0.0005;
         }
     self.emitter.emit('change', self.state);
   });
       Dispatcher.registerCallback('MORE_EDGE', function(){
     if (self.state.HouseEdge < 0.999){
-        self.state.HouseEdge += 0.001;
+        self.state.HouseEdge += 0.0005;
         }
     self.emitter.emit('change', self.state);
   });
@@ -1964,7 +1964,7 @@ var HouseEdgeThingy = React.createClass({
           el.button(
             {className: 'btn btn-success btn-md bot_edge disabled',
               onClick: this._donothing },
-            (betStore.state.HouseEdge * 100).toFixed(1).toString() + '%'
+            (betStore.state.HouseEdge * 100).toFixed(2).toString() + '%'
             )
           ),
           el.div(
