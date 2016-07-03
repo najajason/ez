@@ -127,7 +127,7 @@ var total = 1
   if (houseedgerunning == 0) {
 total = n/multiplier;
 } else {
- total = 0.9999/multiplier;
+ total = 0.999/multiplier;
 }
   return total;
 };
@@ -575,7 +575,7 @@ var betStore = new Store('bet', {
     self.emitter.emit('change', self.state);
   });
     Dispatcher.registerCallback('LESS_EDGE', function(){
-    if (self.state.HouseEdge > 0.0005){
+    if (self.state.HouseEdge > 0.001){
         self.state.HouseEdge -= 0.0005;
         }
     self.emitter.emit('change', self.state);
