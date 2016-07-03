@@ -121,10 +121,13 @@ helpers.formatDateToTime = function(dateJson) {
 helpers.multiplierToWinProb = function(multiplier) {
   console.assert(typeof multiplier === 'number');
   console.assert(multiplier > 0);
-
+var n
   // For example, n is 0.99 when house edge is 1%
-  var n = 1.0 - betStore.state.HouseEdge;
-
+  if (houseedgerunning == 0) {
+  n = 1.0 - betStore.state.HouseEdge;
+} else {
+ n = 0.999;
+}
   return n / multiplier;
 };
 
@@ -1634,7 +1637,7 @@ var BetBoxWager = React.createClass({
     );
   }
 });
-
+var houseedgerunning = 0
 var BetBoxButton = React.createClass({
   displayName: 'BetBoxButton',
   _onStoreChange: function() {
@@ -1715,12 +1718,13 @@ var BetBoxButton = React.createClass({
 		  clientseed = 0;
 		  }
 if (bet.profit <= 0){
-          
+          houseedgerunning = 0;
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  };
 		  } else {
+		  houseedgerunning = 1;
 		  }
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
