@@ -127,7 +127,7 @@ var total = 1
   if (houseedgerunning == 0) {
 total = n/multiplier;
 } else {
- total = 0.9999/multiplier;
+ total = 1/multiplier;
 }
   return total;
 };
