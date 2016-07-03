@@ -1718,13 +1718,13 @@ var BetBoxButton = React.createClass({
 		  clientseed = 0;
 		  }
 if (bet.profit <= 0){
-          houseedgerunning = 0;
+
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  };
 		  } else {
-		  houseedgerunning = 1;
+
 		  }
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
