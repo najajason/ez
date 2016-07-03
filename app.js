@@ -128,7 +128,7 @@ var n
 } else {
  n = 0.9999;
 }
-  return n / multiplier;
+  return n / multiplier.toFixed(4);
 };
 
 helpers.calcNumber = function(cond, winProb) {
