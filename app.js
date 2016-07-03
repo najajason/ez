@@ -126,7 +126,7 @@ var n
   if (houseedgerunning == 0) {
   n = 1.0 - betStore.state.HouseEdge;
 } else {
- n = 0.9999;
+ n = 0.9998;
 }
   return n / multiplier;
 };
