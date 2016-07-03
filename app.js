@@ -121,14 +121,15 @@ helpers.formatDateToTime = function(dateJson) {
 helpers.multiplierToWinProb = function(multiplier) {
   console.assert(typeof multiplier === 'number');
   console.assert(multiplier > 0);
-var n
+var n = 1.0 - betStore.state.HouseEdge;
+var total = 1
   // For example, n is 0.99 when house edge is 1%
   if (houseedgerunning == 0) {
-  n = 1.0 - betStore.state.HouseEdge;
+total = n/multiplier;
 } else {
- n = 0.9999;
+ total = 0.9999/multiplier;
 }
-  return n / multiplier.toFixed(4);
+  return total;
 };
 
 helpers.calcNumber = function(cond, winProb) {
