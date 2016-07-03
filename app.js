@@ -676,6 +676,7 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
+		houseedgerunning = 1;
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		    Dispatcher.sendAction('START_REFRESHING_USER');
 		}
@@ -1637,7 +1638,7 @@ var BetBoxWager = React.createClass({
     );
   }
 });
-var houseedgerunning = 0
+var houseedgerunning = 0;
 var BetBoxButton = React.createClass({
   displayName: 'BetBoxButton',
   _onStoreChange: function() {
@@ -1722,9 +1723,9 @@ if (bet.profit <= 0){
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
-		  };
+		  }
 		  } else {
-
+houseedgerunning = 1;
 		  }
           // Update next bet hash
           Dispatcher.sendAction('SET_NEXT_HASH', bet.next_hash);
