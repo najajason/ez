@@ -1750,7 +1750,7 @@ var BetBoxButton = React.createClass({
       if (betStore.state.clientseed.num > 0){
 	  var AwesomeClientSeed = betStore.state.clientseed.num;
 	  } else {
-	  var key = new Uint8Array(2048); // key length 2048
+	  var key = new Uint32Array(1); // key length 2048
 	  var AwesomeClientSeed = window.crypto.getRandomValues(key);
 	  console.log("CLIENT SEED -------------------------------"+AwesomeClientSeed);
 	  }
