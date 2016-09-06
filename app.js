@@ -1795,10 +1795,6 @@ var BetBoxButton = React.createClass({
           bet.uname = worldStore.state.user.uname;
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
-		  clientseed = clientseed+wincondition*0.01;
-		  if (clientseed >= wincondition){
-		  clientseed = 0;
-		  }
 if (bet.profit <= 0){
 
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
@@ -2155,7 +2151,7 @@ var BetBox = React.createClass({
               React.createElement(StopAt, null)
             ),
 			el.div(
-              {className: 'col-xs-6'},
+              {className: 'col-xs-12'},
               React.createElement(Clientseed, null)
             ),
             el.div(
