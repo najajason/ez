@@ -522,6 +522,11 @@ var betStore = new Store('bet', {
     num: 0,
     error: undefined
   },
+    clientseed: {
+    str: "0, you don't need to use this",
+    num: 0,
+    error: undefined
+  },
     actmult: {
     str: '0 = return to base',
     num: 0,
@@ -567,6 +572,10 @@ var betStore = new Store('bet', {
   
     Dispatcher.registerCallback('UPDATE_STOPAT', function(newStopat) {
     self.state.stopat = _.merge({}, self.state.stopat, newStopat);
+    self.emitter.emit('change', self.state);
+  });
+      Dispatcher.registerCallback('UPDATE_CLIENTSEED', function(newseed) {
+    self.state.clientseed = _.merge({}, self.state.clientseed, newseed);
     self.emitter.emit('change', self.state);
   });
   
@@ -1359,6 +1368,78 @@ var StopAt = React.createClass({
   }
 });
 
+var Clientseed = React.createClass({
+  displayName: 'Clientseed',
+  // Hookup to stores
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    betStore.on('change', this._onStoreChange);
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    betStore.off('change', this._onStoreChange);
+    worldStore.off('change', this._onStoreChange);
+  },
+  //
+  _validateStopat: function(newStr) {
+    var num = parseFloat(newStr, 10);
+
+    // If num is a number, ensure it's at least 0.01x
+    // if (Number.isFinite(num)) {
+    //   num = Math.max(num, 0.01);
+    //   this.props.currBet.setIn(['multiplier', 'str'], num.toString());
+    // }
+
+    var isFloatRegexp = /^(\d*\.)?\d+$/;
+
+    // Ensure str is a number
+    if (isNaN(num) || !isFloatRegexp.test(newStr)) {
+      Dispatcher.sendAction('UPDATE_STOPAT', { error: 'INVALID_MULTIPLIER' });
+    } else {
+      Dispatcher.sendAction('UPDATE_STOPAT', {
+        num: num,
+        error: null
+      });
+    }
+  },
+  _onStopatChange: function(e) {
+    console.log('Clientseed changed');
+    var str = e.target.value;
+    console.log('You entered', str, 'as your Clientseed');
+    Dispatcher.sendAction('UPDATE_CLIENTSEED', { str: str });
+    this._validateStopat(str);
+  },
+  render: function() {
+    return el.div(
+      {className: 'form-group'},
+      el.p(
+        {className: 'lead'},
+        el.strong(
+          // If wagerError, make the label red
+          betStore.state.wager.error ? { style: {color: 'black'} } : null,
+          'Client Seed:')
+      ),
+      el.div(
+        {className: 'input-group'},
+        el.input(
+          {
+            type: 'text',
+            value: betStore.state.stopat.str,
+            className: 'form-control input-lg',
+            onChange: this._onStopatChange,
+            disabled: !!worldStore.state.isLoading
+          }
+        ),
+        el.span(
+          {className: 'input-group-addon'}
+        )
+      )
+    );
+  }
+});
+
 var ActualMultiplier = React.createClass({
   displayName: 'ActualMultiplier',
   // Hookup to stores
@@ -1690,7 +1771,7 @@ var BetBoxButton = React.createClass({
  
       var params = {
         wager: currentBet,
-        client_seed: Math.floor(clientseed), // TODO
+        client_seed: Math.floor(betStore.state.clientseed.num), // TODO
         hash: hash,
         payouts: [
  {"from": 0, "to": Math.round(wincondition*helpers.multiplierToWinProb(currentMultiplier)), "value": currentBet * currentMultiplier },
@@ -2073,6 +2154,10 @@ var BetBox = React.createClass({
 			 el.div(
               {className: 'col-xs-6'},
               React.createElement(StopAt, null)
+            ),
+			el.div(
+              {className: 'col-xs-6'},
+              React.createElement(Clientseed, null)
             ),
             el.div(
             ),
