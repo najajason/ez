@@ -1747,6 +1747,7 @@ var BetBoxButton = React.createClass({
 
       var hash = betStore.state.nextHash;
       console.assert(typeof hash === 'string');
+	  console.log(betStore.state.clientseed.num);
       if (betStore.state.clientseed.num > 0){
 	  var AwesomeClientSeed = betStore.state.clientseed.num;
 	  } else {
