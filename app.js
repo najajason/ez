@@ -1392,9 +1392,9 @@ var Clientseed = React.createClass({
 
     // Ensure str is a number
     if (isNaN(num) || !isFloatRegexp.test(newStr)) {
-      Dispatcher.sendAction('UPDATE_STOPAT', { error: 'INVALID_MULTIPLIER' });
+      Dispatcher.sendAction('UPDATE_CLIENTSEED', { error: 'INVALID_MULTIPLIER' });
     } else {
-      Dispatcher.sendAction('UPDATE_STOPAT', {
+      Dispatcher.sendAction('UPDATE_CLIENTSEED', {
         num: num,
         error: null
       });
