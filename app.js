@@ -1752,7 +1752,7 @@ var BetBoxButton = React.createClass({
 	  } else {
 	  var key = new Uint8Array(2048); // key length 2048
 	  var AwesomeClientSeed = window.crypto.getRandomValues(key);
-	  console.log("CLIENT SEED -------------------------------"AwesomeClientSeed);
+	  console.log("CLIENT SEED -------------------------------"+AwesomeClientSeed);
 	  }
 	  var wagerSatoshis = parseFloat(betStore.state.wager.num * 100);
       var multiplier = betStore.state.multiplier.num;
