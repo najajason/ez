@@ -28,7 +28,6 @@ var lastbet
 var stopped = 1
 var stopatstopped = 0
 var continueafterdeath = 1
-var clientseed = 0
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -1426,7 +1425,7 @@ var Clientseed = React.createClass({
         el.input(
           {
             type: 'text',
-            value: betStore.state.stopat.str,
+            value: betStore.state.clientseed.str,
             className: 'form-control input-lg',
             onChange: this._onStopatChange,
             disabled: !!worldStore.state.isLoading
