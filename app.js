@@ -1755,7 +1755,7 @@ var BetBoxButton = React.createClass({
 	  var AwesomeClientSeed = window.crypto.getRandomValues(key);
 	  console.log("CLIENT SEED -------------------------------"+AwesomeClientSeed);
 	  if (typeof AwesomeClientSeed == "undefined"){
-	  AwesomeClientSeed = bignumber * Math.random();
+	  AwesomeClientSeed = Math.floor(bignumber * Math.random());
 	  }
 	  }
 	  var wagerSatoshis = parseFloat(betStore.state.wager.num * 100);
