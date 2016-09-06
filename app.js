@@ -522,7 +522,7 @@ var betStore = new Store('bet', {
     error: undefined
   },
     clientseed: {
-    str: "0, you don't need to use this",
+    str: "0, you don't need to use this.",
     num: 0,
     error: undefined
   },
