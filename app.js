@@ -27,7 +27,9 @@ var plusbits = 0.01
 var lastbet
 var stopped = 1
 var stopatstopped = 0
+var bignumber = Math.pow(2,32)
 var continueafterdeath = 1
+var random = require("random-js")();// uses the nativeMath engine
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -522,7 +524,7 @@ var betStore = new Store('bet', {
     error: undefined
   },
     clientseed: {
-    str: "0, you don't need to use this.",
+    str: "0, Leave this at zero for random seeds.",
     num: 0,
     error: undefined
   },
@@ -1750,7 +1752,11 @@ var BetBoxButton = React.createClass({
 
       var hash = betStore.state.nextHash;
       console.assert(typeof hash === 'string');
-
+      if (betStore.state.clientseed.num > 0){
+	  var AwesomeClientSeed = betStore.state.clientseed.num;
+	  } else {
+	  var AwesomeClientSeed = random.integer(0, bignumber);
+	  }
 	  var wagerSatoshis = parseFloat(betStore.state.wager.num * 100);
       var multiplier = betStore.state.multiplier.num;
 	  var streakSecurity = multiplier
@@ -1758,7 +1764,7 @@ var BetBoxButton = React.createClass({
       var number = helpers.calcNumber(
         cond, helpers.multiplierToWinProb(currentMultiplier)
       );
-	  var wincondition = Math.pow(2,32)
+	  var wincondition = bignumber;
  if (currentMultiplier == 1.01){
  currentBet = betStore.state.wager.num*100;
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
@@ -1770,7 +1776,7 @@ var BetBoxButton = React.createClass({
  
       var params = {
         wager: currentBet,
-        client_seed: Math.floor(betStore.state.clientseed.num), // TODO
+        client_seed: Math.floor(AwesomeClientSeed), // TODO
         hash: hash,
         payouts: [
  {"from": 0, "to": Math.round(wincondition*helpers.multiplierToWinProb(currentMultiplier)), "value": currentBet * currentMultiplier },
