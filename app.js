@@ -29,7 +29,10 @@ var stopped = 1
 var stopatstopped = 0
 var bignumber = Math.pow(2,32)
 var continueafterdeath = 1
-var random = ("random-js")();// uses the nativeMath engine
+define(function (require) {
+  var Random = require("random");
+  return new Random(Random.engines.mt19937().autoSeed());
+});
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
