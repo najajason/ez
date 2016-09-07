@@ -2002,10 +2002,7 @@ curmultiplier = 100;
 		  stopped = 1;
 		  }
 		  } else {
-curmultiplier = (curmultiplier*betStore.state.onwin)/100;
-if (curmultiplier == 0) {
-curmultiplier = 100;
-}
+
 houseedgerunning = 1;
 		  }
           // Update next bet hash
@@ -2036,6 +2033,10 @@ houseedgerunning = 1;
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
+		curmultiplier = (curmultiplier*betStore.state.onwin)/100;
+		if (curmultiplier == 0) {
+		curmultiplier = 100;
+		}
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
 		stopped = 1;
