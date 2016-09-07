@@ -1955,7 +1955,7 @@ var BetBoxButton = React.createClass({
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  };
- } else {
+ } else if (currentMultiplier == 1.01) {
  console.log("NOT IN BET TAB");
  currentBet = parseFloat(betStore.state.wager.num*curmultiplier*100);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
