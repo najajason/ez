@@ -1998,8 +1998,10 @@ if (curmultiplier == 0) {
 curmultiplier = 100;
 }
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
+		  if (worldStore.state.currBetTab == 'BETTING'){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
+		  }
 		  }
 		  } else {
 
@@ -2052,13 +2054,15 @@ houseedgerunning = 1;
 		if (bet.profit < 0) {
 		if (worldStore.state.hotkeysEnabled == true && stopped == 0 ){
 		currentBet = betStore.state.wager.num;
-
+if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		}
 		} else{
 		currentBet = betStore.state.wager.num;
-
+if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
+		}
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
       }
