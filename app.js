@@ -1990,7 +1990,11 @@ var BetBoxButton = React.createClass({
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
 if (bet.profit <= 0){
+if )multiplied == 0){
 curmultiplier = parseInt(curmultiplier*betStore.state.onloss.num)/100;
+} else {
+multiplied = 0;
+}
 if (curmultiplier == 0) {
 curmultiplier = 100;
 }
@@ -2035,9 +2039,11 @@ houseedgerunning = 1;
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
-		curmultiplier = parseInt((curmultiplier*betStore.state.onwin.num)/betStore.state.onloss.num);
+		curmultiplier = parseInt((curmultiplier*betStore.state.onwin.num));
+		multiplied = 1;
 		if (curmultiplier == 0) {
-		curmultiplier = parseInt(100/betStore.state.onloss.num);
+		curmultiplier = parseInt(100);
+		multiplied = 0;
 		}
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
