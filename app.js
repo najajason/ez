@@ -2066,7 +2066,7 @@ houseedgerunning = 1;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		betbust = totalmultiplier-0.01;
+		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
 		bet.firstwager = currentBet;
@@ -2076,7 +2076,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		betbust = totalmultiplier-0.01;
+		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
 		bet.firstwager = currentBet;
