@@ -2424,15 +2424,15 @@ var betboxautobet = React.createClass({
             ),
             el.div(
               {className: 'col-xs-6'},
-              React.createElement(, null)
+              React.createElement(AutobetOnLoss, null)
             ),
 			 el.div(
               {className: 'col-xs-6'},
-              React.createElement(AutobetOnLoss, null)
+              React.createElement(AutobetOnWin, null)
             ),
 			el.div(
               {className: 'col-xs-12'},
-              React.createElement(AutobetOnWin, null)
+              React.createElement(clientseed, null)
             ),
             el.div(
             ),
