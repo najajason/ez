@@ -2065,14 +2065,14 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		bet.busted = totalmultiplier-0.01;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		bet.busted = totalmultiplier-0.01;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
@@ -2082,13 +2082,13 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  }
 		Dispatcher.sendAction('START_REFRESHING_USER');
@@ -2680,6 +2680,7 @@ var MyBetsTabContent = React.createClass({
             el.th(null, 'Time'),
             el.th(null, 'User'),
             el.th(null, 'Wager'),
+            el.th(null, 'Crashed at'),
             el.th({className: 'text-right'}, 'Stopped at'),
             // el.th(null, 'Roll'),
             el.th(
@@ -2729,11 +2730,20 @@ var MyBetsTabContent = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10((bet.wager/100)/(bet.busted), -2),
+        helpers.round10((bet.firstwager/100), -2),
         ' bits'
       ),
       // Stopped at
       el.td(
+        {
+          className: 'text-right',
+          style: {
+            fontFamily: 'monospace'
+          }
+        },
+        (bet.crashed).toFixed(2)
+      ), 
+	  el.td(
         {
           className: 'text-right',
           style: {
