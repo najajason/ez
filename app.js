@@ -2997,7 +2997,10 @@ var App = React.createClass({
       {className: 'container'},
       // Navbar
       React.createElement(Navbar, null),
-
+      el.div(
+        {style: {marginTop: '15px'}},
+        React.createElement(BettingTabs, null)
+      ),
 	  // BetBox & ChatBox
       el.div(
         {className: 'row'},
@@ -3411,16 +3414,16 @@ var BettingTabs = React.createClass({
           'Betting'
         )
       ),
-        el.li(
-          {className: worldStore.state.currBetTab === 'AUTOBET' ? 'active' : ''},
-          el.a(
-            {
-              href: 'javascript:void(0)',
-              onClick: this._makeTabChangeHandler('AUTOBET')
-            },
-            'Autobet'
-          )
+      el.li(
+        {className: worldStore.state.currBetTab === 'AUTOBET' ? 'active' : ''},
+        el.a(
+          {
+            href: 'javascript:void(0)',
+            onClick: this._makeTabChangeHandler('AUTOBET')
+          },
+          'Autobet'
         )
+      )
     );
   }
 });
