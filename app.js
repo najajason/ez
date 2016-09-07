@@ -2001,6 +2001,8 @@ curmultiplier = 100;
 		  if (worldStore.state.currBetTab == 'BETTING'){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
+		  } else {
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		  }
 		  } else {
@@ -2057,12 +2059,16 @@ houseedgerunning = 1;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		}
+		} else {
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  }
 		} else{
 		currentBet = betStore.state.wager.num;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
-		}
+		} else {
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  }
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
       }
