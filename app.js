@@ -2744,7 +2744,6 @@ var MyBetsTabContent = React.createClass({
       // Stopped at
       el.td(
         {
-          className: 'text-right',
           style: {
             fontFamily: 'monospace'
           }
