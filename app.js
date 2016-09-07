@@ -2043,7 +2043,7 @@ houseedgerunning = 1;
 		multiplied = 1;
 		if (curmultiplier == 0) {
 		curmultiplier = parseInt(100);
-		multiplied = 0;
+		multiplied = 1;
 		}
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
