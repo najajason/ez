@@ -2308,6 +2308,32 @@ var ContinueToggle = React.createClass({
   }
 });
 
+var AutobetToggle = React.createClass({
+  displayName: 'AutobetToggle',
+  _onClick: function() {
+    Dispatcher.sendAction('TOGGLE_CONTINUE');
+  },
+  render: function() {
+    return (
+      el.div(
+        {className: 'text-center'},
+        el.button(
+          {
+            type: 'button',
+            className: 'btn btn-default btn-sm',
+            onClick: this._onClick,
+            style: { marginTop: '-15px' }
+          },
+          'Autobet: ',
+          continueafterdeath == 1 ?
+            el.span({className: 'label label-success'}, 'ON') :
+          el.span({className: 'label label-default'}, 'OFF')
+        )
+      )
+    );
+  }
+});
+
 var BetToggle = React.createClass({
   displayName: 'betToggle',
     _onClick: function() {
@@ -2517,7 +2543,7 @@ var BetBoxAutoBet = React.createClass({
             ),
 	  el.div(
 	  {className: 'row'},
-      React.createElement(ContinueToggle, null),
+      React.createElement(AutobetToggle, null),
 	  React.createElement(HouseEdgeThingy, null)
 
 	  )
