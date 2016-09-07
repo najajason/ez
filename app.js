@@ -523,6 +523,11 @@ var betStore = new Store('bet', {
     num: 0,
     error: undefined
   },
+    onloss: {
+    str: "0, Leave this at zero to return to base.",
+    num: 0,
+    error: undefined
+  },
     actmult: {
     str: '0 = return to base',
     num: 0,
@@ -574,6 +579,10 @@ var betStore = new Store('bet', {
     self.state.clientseed = _.merge({}, self.state.clientseed, newseed);
     self.emitter.emit('change', self.state);
   });
+        Dispatcher.registerCallback('UPDATE_ONLOSS', function(newonloss) {
+    self.state.onloss = _.merge({}, self.state.onloss, newonloss);
+    self.emitter.emit('change', self.state);
+  });
   
     Dispatcher.registerCallback('UPDATE_ACTMULT', function(newActMult) {
     self.state.actmult = _.merge({}, self.state.actmult, newActMult);
@@ -601,9 +610,11 @@ var worldStore = new Store('world', {
   accessTokena: access_token,
   isRefreshingUser: false,
   hotkeysEnabled: false,
+  autobetEnabled: false,
   GameRunning: false,
   BetsEnabled: true,
   currTab: 'MY_BETS',
+  currBetTab: 'BETTING',
   // TODO: Turn this into myBets or something
   bets: new CBuffer(config.bet_buffer_size),
   // TODO: Fetch list on load alongside socket subscription
@@ -654,6 +665,15 @@ var worldStore = new Store('world', {
     self.emitter.emit('change', self.state);
   });
 
+    Dispatcher.registerCallback('CHANGE_BETTAB', function(tabName) {
+	  if (self.state.AutobetEnabled == true){
+  		  Dispatcher.sendAction('TOGGLE_AUTOBET');
+		  }
+    console.assert(typeof tabName === 'string');
+    self.state.currBetTab = tabName;
+    self.emitter.emit('change', self.state);
+  });
+  
   // This is only for my bets? Then change to 'NEW_MY_BET'
   Dispatcher.registerCallback('NEW_BET', function(bet) {
     console.assert(typeof bet === 'object');
@@ -686,6 +706,11 @@ var worldStore = new Store('world', {
 		Dispatcher.sendAction('NEW_BET', lastbet);
 		    Dispatcher.sendAction('START_REFRESHING_USER');
 		}
+  });
+  
+    Dispatcher.registerCallback('TOGGLE_AUTOBET', function() {
+    self.state.autobetEnabled = !self.state.autobetEnabled;
+    self.emitter.emit('change', self.state);
   });
   
     Dispatcher.registerCallback('TOGGLE_CONTINUE', function() {
@@ -1423,6 +1448,78 @@ var Clientseed = React.createClass({
           {
             type: 'text',
             value: betStore.state.clientseed.str,
+            className: 'form-control input-lg',
+            onChange: this._onStopatChange,
+            disabled: !!worldStore.state.isLoading
+          }
+        ),
+        el.span(
+          {className: 'input-group-addon'}
+        )
+      )
+    );
+  }
+});
+
+var AutobetOnLoss = React.createClass({
+  displayName: 'AutobetOnLoss',
+  // Hookup to stores
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    betStore.on('change', this._onStoreChange);
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    betStore.off('change', this._onStoreChange);
+    worldStore.off('change', this._onStoreChange);
+  },
+  //
+  _validateStopat: function(newStr) {
+    var num = parseFloat(newStr, 10);
+
+    // If num is a number, ensure it's at least 0.01x
+    // if (Number.isFinite(num)) {
+    //   num = Math.max(num, 0.01);
+    //   this.props.currBet.setIn(['multiplier', 'str'], num.toString());
+    // }
+
+    var isFloatRegexp = /^(\d*\.)?\d+$/;
+
+    // Ensure str is a number
+    if (isNaN(num) || !isFloatRegexp.test(newStr)) {
+      Dispatcher.sendAction('UPDATE_ONLOSS', { error: 'INVALID_MULTIPLIER' });
+    } else {
+      Dispatcher.sendAction('UPDATE_ONLOSS', {
+        num: num,
+        error: null
+      });
+    }
+  },
+  _onStopatChange: function(e) {
+    console.log('onloss changed');
+    var str = e.target.value;
+    console.log('You entered', str, 'as your onloss');
+    Dispatcher.sendAction('UPDATE_ONLOSS', { str: str });
+    this._validateStopat(str);
+  },
+  render: function() {
+    return el.div(
+      {className: 'form-group'},
+      el.p(
+        {className: 'lead'},
+        el.strong(
+          // If wagerError, make the label red
+          betStore.state.wager.error ? { style: {color: 'black'} } : null,
+          'Increase by % on loss:')
+      ),
+      el.div(
+        {className: 'input-group'},
+        el.input(
+          {
+            type: 'text',
+            value: betStore.state.onloss.str,
             className: 'form-control input-lg',
             onChange: this._onStopatChange,
             disabled: !!worldStore.state.isLoading
@@ -2215,6 +2312,118 @@ var BetBox = React.createClass({
   }
 });
 
+var BetBox = React.createClass({
+  displayName: 'BetBoxAutoBet',
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    worldStore.off('change', this._onStoreChange);
+  },
+  render: function() {
+    return el.div(
+      null,
+      el.div(
+        {className: 'panel panel-default'},
+        el.div(
+          {className: 'panel-body'},
+          el.div(
+            {className: 'row'},
+            el.div(
+              {className: 'col-xs-6'},
+              React.createElement(BetBoxWager, null)
+            ),
+			 el.div(
+              {className: 'col-xs-6'},
+              React.createElement(StopAt, null)
+            ),
+			el.div(
+              {className: 'col-xs-12'},
+              React.createElement(Clientseed, null)
+            ),
+            el.div(
+            ),
+            // HR
+            el.div(
+              {className: 'row'},
+              el.div(
+              )
+            ),
+			
+			 el.div(
+            ),
+			
+			 el.div(
+            ),
+			
+            el.div(
+              )
+            ),
+            // Bet info bar
+            el.div(
+              null,
+              el.div(
+              ),
+              el.div(
+              )
+            )
+          )
+        ),
+        el.div(
+          {className: 'panel-footer clearfix'},
+          React.createElement(BetBoxButton, null)
+        ),        
+		el.div(
+	  {className: 'panel-footer clearfix'},
+      React.createElement(HotkeyToggle, null)
+	  ),
+	  
+            el.div(
+              {className: 'row'},
+              el.div(
+                {className: 'col-xs-12'},
+                el.hr(null)
+              )
+            ),
+	  el.div(
+	  {className: 'row'},
+      React.createElement(ContinueToggle, null),
+	  React.createElement(HouseEdgeThingy, null)
+
+	  )
+	  );
+  }
+});
+
+
+var BetBoxContent = React.createClass({
+  displayName: 'TabContent',
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    worldStore.off('change', this._onStoreChange);
+  },
+  render: function() {
+    switch(worldStore.state.currBetTab) {
+      case 'BETTING':
+        return React.createElement(BetBox, null);
+      case 'AUTOBET':
+        return React.createElement(BetBoxAutoBet, null);
+      default:
+        alert('Unsupported currBetTab value: ', worldStore.state.currBetTab);
+        break;
+    }
+  }
+});
+
+
 var Tabs = React.createClass({
   displayName: 'Tabs',
   _onStoreChange: function() {
@@ -2703,7 +2912,7 @@ var App = React.createClass({
         {className: 'row'},
         el.div(
           {className: 'col-sm-5'},
-          React.createElement(BetBox, null)
+          React.createElement(BetBoxContent, null)
         ),
         el.div(
           {className: 'col-sm-7'},
@@ -3080,6 +3289,50 @@ function ponzibuyin(amount){
     });
 }
 
+var BettingTabs = React.createClass({
+  displayName: 'BettingTabs',
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    worldStore.off('change', this._onStoreChange);
+  },
+  _makeTabChangeHandler: function(tabName) {
+
+    var self = this;
+    return function() {
+      Dispatcher.sendAction('CHANGE_BETTAB', tabName);
+    };
+  },
+  render: function() {
+    return el.ul(
+      {className: 'nav nav-tabs'},
+      el.li(
+        {className: worldStore.state.currBetTab === 'BETTING' ? 'active' : ''},
+        el.a(
+          {
+            href: 'javascript:void(0)',
+            onClick: this._makeTabChangeHandler('BETTING')
+          },
+          'Betting'
+        )
+      ),
+        el.li(
+          {className: worldStore.state.currBetTab === 'AUTOBET' ? 'active' : ''},
+          el.a(
+            {
+              href: 'javascript:void(0)',
+              onClick: this._makeTabChangeHandler('AUTOBET')
+            },
+            'Autobet'
+          )
+        )
+    );
+  }
+});
 
 
 // This function is passed to the recaptcha.js script and called when
