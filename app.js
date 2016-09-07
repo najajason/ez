@@ -1947,7 +1947,7 @@ var BetBoxButton = React.createClass({
       );
 	  var wincondition = bignumber;
  if (currentMultiplier == 1.01 && worldStore.state.currBetTab == 'BETTING'){
- currentBet = parseFloat(betStore.state.wager.num*100);
+ currentBet = parseInt(betStore.state.wager.num*100);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
@@ -1963,7 +1963,7 @@ var BetBoxButton = React.createClass({
 
  
       var params = {
-        wager: currentBet,
+        wager: parseInt(currentBet),
         client_seed: Math.floor(AwesomeClientSeed), // TODO
         hash: hash,
         payouts: [
