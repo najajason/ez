@@ -706,7 +706,10 @@ var worldStore = new Store('world', {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
+	if (currBetTab == 'BETTING'){
 		currentBet = betStore.state.wager.num;
+		} else {
+		}
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
 		stopped = 0;
@@ -1895,6 +1898,7 @@ var BetBoxWager = React.createClass({
     );
   }
 });
+var curmultiplier = 1;
 var houseedgerunning = 0;
 var BetBoxButton = React.createClass({
   displayName: 'BetBoxButton',
@@ -1945,8 +1949,14 @@ var BetBoxButton = React.createClass({
         cond, helpers.multiplierToWinProb(currentMultiplier)
       );
 	  var wincondition = bignumber;
- if (currentMultiplier == 1.01){
+ if (currentMultiplier == 1.01 && worldStore.state.currBetTab == 'BETTING'){
  currentBet = betStore.state.wager.num*100;
+ if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  stopped = 1;
+		  };
+ } else {
+ currentBet = betStore.state.wager.num*100*curmultiplier;
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
@@ -1982,12 +1992,13 @@ var BetBoxButton = React.createClass({
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
 if (bet.profit <= 0){
-
+curmultiplier = Math.max(curmultiplier*betStore.state.onloss/100, 0.01);
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  }
 		  } else {
+curmultiplier = Math.max(curmultiplier*betStore.state.onwin/100, 0.01);
 houseedgerunning = 1;
 		  }
           // Update next bet hash
