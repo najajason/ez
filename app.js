@@ -2997,10 +2997,14 @@ var App = React.createClass({
       {className: 'container'},
       // Navbar
       React.createElement(Navbar, null),
-
-	  // BetBox & ChatBox
+      el.div(
+        {style: {marginTop: '15px'}},
+        React.createElement(BettingTabs, null)
+      ),
+      // BetBox & ChatBox
       el.div(
         {className: 'row'},
+
         el.div(
           {className: 'col-sm-5'},
           React.createElement(BetBoxContent, null)
