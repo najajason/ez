@@ -2394,7 +2394,7 @@ var BetBox = React.createClass({
   }
 });
 
-var betboxautobet = React.createClass({
+var BetBoxAutoBet = React.createClass({
   displayName: 'BetBoxAutoBet',
   _onStoreChange: function() {
     this.forceUpdate();
