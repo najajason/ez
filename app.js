@@ -2772,7 +2772,7 @@ var MyBetsTabContent = React.createClass({
                 {style: {color: bet.lastprofit > 0 ? 'green' : 'red'}, paddingLeft: '50px'},
                 bet.lastprofit > 0 ?
                   '+' + helpers.round10(bet.lastprofit/100, -2) :
-                  "-"+helpers.round10((bet.profit/100), -2),
+                  "-"+helpers.round10((bet.firstwager), -2),
                 ' bits'
               )
             );
