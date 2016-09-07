@@ -2765,13 +2765,13 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        ((bet.busted/100)-0.01).toFixed(2)
+        ((bet.busted/100)).toFixed(2)
       ),
               // profit
               el.td(
                 {style: {color: bet.lastprofit > 0 ? 'green' : 'red'}, paddingLeft: '50px'},
                 bet.lastprofit > 0 ?
-                  '+' + helpers.round10(bet.lastprofit/100, -2) :
+                  '+' + helpers.round10((bet.lastprofit/100)+0.01, -2) :
                   "-"+helpers.round10((bet.firstwager), -2),
                 ' bits'
               )
