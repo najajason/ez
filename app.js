@@ -2003,6 +2003,7 @@ curmultiplier = 100;
 		  stopped = 1;
 		  } else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		  }
 		  } else {
@@ -2060,6 +2061,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		} else {
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		} else{
