@@ -2239,6 +2239,14 @@ var HotkeyToggle = React.createClass({
   displayName: 'HotkeyToggle',
   _onClick: function() {
     Dispatcher.sendAction('TOGGLE_HOTKEYS');
+	if (continueafterdeath == 0){
+			bet.busted = betbust;
+		bet.lastprofit = lastprofit;
+		  bet.crashed = totalmultiplier-0.01;
+		  lastbet = bet;
+		  bet.firstwager = currentBet;
+		  Dispatcher.sendAction('NEW_BET', bet);
+		  }
   },
   render: function() {
     return (
