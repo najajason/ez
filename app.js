@@ -1992,13 +1992,19 @@ var BetBoxButton = React.createClass({
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
 if (bet.profit <= 0){
-curmultiplier = Math.max(curmultiplier*betStore.state.onloss/100, 0.01);
+curmultiplier = curmultiplier*betStore.state.onloss/100;
+if (curmultiplier == 0) {
+curmultiplier = 1;
+}
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  }
 		  } else {
-curmultiplier = Math.max(curmultiplier*betStore.state.onwin/100, 0.01);
+curmultiplier = curmultiplier*betStore.state.onwin/100;
+if (curmultiplier == 0) {
+curmultiplier = 1;
+}
 houseedgerunning = 1;
 		  }
           // Update next bet hash
