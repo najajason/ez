@@ -1945,7 +1945,7 @@ var BetBoxButton = React.createClass({
       var number = helpers.calcNumber(
         cond, helpers.multiplierToWinProb(currentMultiplier)
       );
-	  var wincondition = bignumber;
+	  var wincondition = Math.pow(2, 32);
  if (currentMultiplier == 1.01 && worldStore.state.currBetTab == 'BETTING'){
  currentBet = parseInt(betStore.state.wager.num*100);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
