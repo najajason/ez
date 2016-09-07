@@ -2702,7 +2702,7 @@ var MyBetsTabContent = React.createClass({
             el.th(
               {
                 style: {
-                  paddingLeft: '50px'
+                  //paddingLeft: '50px'
                 }
               },
               'Profit'
