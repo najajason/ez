@@ -714,6 +714,7 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
+		betbust = totalmultiplier-0.01;
 		houseedgerunning = 1;
 		
 		    Dispatcher.sendAction('START_REFRESHING_USER');
