@@ -1950,13 +1950,13 @@ var BetBoxButton = React.createClass({
       );
 	  var wincondition = bignumber;
  if (currentMultiplier == 1.01 && worldStore.state.currBetTab == 'BETTING'){
- currentBet = betStore.state.wager.num*100;
+ currentBet = parseFloat(betStore.state.wager.num*100);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
 		  };
  } else {
- currentBet = betStore.state.wager.num*100*curmultiplier;
+ currentBet = parseFloat(betStore.state.wager.num*100*curmultiplier);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
