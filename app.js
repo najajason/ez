@@ -2989,6 +2989,50 @@ var Footer = React.createClass({
     );
   }
 });
+var BettingTabs = React.createClass({
+  displayName: 'BettingTabs',
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    worldStore.off('change', this._onStoreChange);
+  },
+  _makeTabChangeHandler: function(tabName) {
+
+    var self = this;
+    return function() {
+      Dispatcher.sendAction('CHANGE_BETTAB', tabName);
+    };
+  },
+  render: function() {
+    return el.ul(
+      {className: 'nav nav-tabs'},
+      el.li(
+        {className: worldStore.state.currBetTab === 'BETTING' ? 'active' : ''},
+        el.a(
+          {
+            href: 'javascript:void(0)',
+            onClick: this._makeTabChangeHandler('BETTING')
+          },
+          'Betting'
+        )
+      ),
+      el.li(
+        {className: worldStore.state.currBetTab === 'AUTOBET' ? 'active' : ''},
+        el.a(
+          {
+            href: 'javascript:void(0)',
+            onClick: this._makeTabChangeHandler('AUTOBET')
+          },
+          'Autobet'
+        )
+      )
+    );
+  }
+});
 
 var App = React.createClass({
   displayName: 'App',
@@ -3383,50 +3427,7 @@ function ponzibuyin(amount){
     });
 }
 
-var BettingTabs = React.createClass({
-  displayName: 'BettingTabs',
-  _onStoreChange: function() {
-    this.forceUpdate();
-  },
-  componentDidMount: function() {
-    worldStore.on('change', this._onStoreChange);
-  },
-  componentWillUnmount: function() {
-    worldStore.off('change', this._onStoreChange);
-  },
-  _makeTabChangeHandler: function(tabName) {
 
-    var self = this;
-    return function() {
-      Dispatcher.sendAction('CHANGE_BETTAB', tabName);
-    };
-  },
-  render: function() {
-    return el.ul(
-      {className: 'nav nav-tabs'},
-      el.li(
-        {className: worldStore.state.currBetTab === 'BETTING' ? 'active' : ''},
-        el.a(
-          {
-            href: 'javascript:void(0)',
-            onClick: this._makeTabChangeHandler('BETTING')
-          },
-          'Betting'
-        )
-      ),
-      el.li(
-        {className: worldStore.state.currBetTab === 'AUTOBET' ? 'active' : ''},
-        el.a(
-          {
-            href: 'javascript:void(0)',
-            onClick: this._makeTabChangeHandler('AUTOBET')
-          },
-          'Autobet'
-        )
-      )
-    );
-  }
-});
 
 
 // This function is passed to the recaptcha.js script and called when
