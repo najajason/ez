@@ -714,7 +714,7 @@ var worldStore = new Store('world', {
 		stopatstopped = 0;
 		} else {
 		houseedgerunning = 1;
-		Dispatcher.sendAction('NEW_BET', lastbet);
+		
 		    Dispatcher.sendAction('START_REFRESHING_USER');
 		}
   });
@@ -1987,8 +1987,7 @@ var BetBoxButton = React.createClass({
           // Sync up with the bets we get from socket
           bet.wager = currentBet;
           bet.uname = worldStore.state.user.uname;
-		  bet.busted = totalmultiplier-0.01;
-		  lastbet = bet;
+		  
 if (bet.profit <= 0){
 if (multiplied == 0){
 curmultiplier = parseInt(curmultiplier*betStore.state.onloss.num)/100;
@@ -2004,7 +2003,6 @@ curmultiplier = 100;
 		  stopped = 1;
 		  } else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		  }
 		  } else {
@@ -2019,6 +2017,7 @@ houseedgerunning = 1;
 		  if (totalmultiplier >= betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0 && stopatstopped == 0){
 		  stopatstopped = 1;
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  bet.busted = totalmultiplier-0.01;
 		  };
 
 		  
@@ -2063,16 +2062,34 @@ houseedgerunning = 1;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		bet.busted = totalmultiplier-0.01;
+		  bet.crashed = totalmultiplier-0.01;
+		  lastbet = bet;
+		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		bet.busted = totalmultiplier-0.01;
+		  bet.crashed = totalmultiplier-0.01;
+		  lastbet = bet;
+		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  console.log(lastbet);
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		} else{
 		currentBet = betStore.state.wager.num;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
+		  bet.crashed = totalmultiplier-0.01;
+		  lastbet = bet;
+		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  bet.crashed = totalmultiplier-0.01;
+		  lastbet = bet;
+		  Dispatcher.sendAction('NEW_BET', lastbet);
+		  console.log(lastbet);
 		  }
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
