@@ -124,7 +124,7 @@ var total = 1
   if (houseedgerunning == 0) {
 total = n/multiplier;
 } else {
- total = 0.9989/multiplier;
+ total = 0.999/multiplier;
 }
   return total;
 };
@@ -1963,7 +1963,7 @@ var BetBoxButton = React.createClass({
 
  
       var params = {
-        wager: parseInt(currentBet),
+        wager: currentBet,
         client_seed: Math.floor(AwesomeClientSeed), // TODO
         hash: hash,
         payouts: [
