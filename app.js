@@ -2765,7 +2765,7 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        ((bet.busted/100)+0.01).toFixed(2)
+        ((bet.busted/100)-0.01).toFixed(2)
       ),
               // profit
               el.td(
