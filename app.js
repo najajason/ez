@@ -528,6 +528,11 @@ var betStore = new Store('bet', {
     num: 0,
     error: undefined
   },
+    onwin: {
+    str: "0, Leave this at zero to return to base.",
+    num: 0,
+    error: undefined
+  },
     actmult: {
     str: '0 = return to base',
     num: 0,
@@ -581,6 +586,11 @@ var betStore = new Store('bet', {
   });
         Dispatcher.registerCallback('UPDATE_ONLOSS', function(newonloss) {
     self.state.onloss = _.merge({}, self.state.onloss, newonloss);
+    self.emitter.emit('change', self.state);
+  });
+  
+        Dispatcher.registerCallback('UPDATE_ONWIN', function(newonwin) {
+    self.state.onwin = _.merge({}, self.state.onwin, newonwin);
     self.emitter.emit('change', self.state);
   });
   
@@ -1533,6 +1543,78 @@ var AutobetOnLoss = React.createClass({
   }
 });
 
+var AutobetOnWin = React.createClass({
+  displayName: 'AutobetOnWin',
+  // Hookup to stores
+  _onStoreChange: function() {
+    this.forceUpdate();
+  },
+  componentDidMount: function() {
+    betStore.on('change', this._onStoreChange);
+    worldStore.on('change', this._onStoreChange);
+  },
+  componentWillUnmount: function() {
+    betStore.off('change', this._onStoreChange);
+    worldStore.off('change', this._onStoreChange);
+  },
+  //
+  _validateStopat: function(newStr) {
+    var num = parseFloat(newStr, 10);
+
+    // If num is a number, ensure it's at least 0.01x
+    // if (Number.isFinite(num)) {
+    //   num = Math.max(num, 0.01);
+    //   this.props.currBet.setIn(['multiplier', 'str'], num.toString());
+    // }
+
+    var isFloatRegexp = /^(\d*\.)?\d+$/;
+
+    // Ensure str is a number
+    if (isNaN(num) || !isFloatRegexp.test(newStr)) {
+      Dispatcher.sendAction('UPDATE_ONWIN', { error: 'INVALID_MULTIPLIER' });
+    } else {
+      Dispatcher.sendAction('UPDATE_ONWIN', {
+        num: num,
+        error: null
+      });
+    }
+  },
+  _onStopatChange: function(e) {
+    console.log('onloss changed');
+    var str = e.target.value;
+    console.log('You entered', str, 'as your onloss');
+    Dispatcher.sendAction('UPDATE_ONWIN', { str: str });
+    this._validateStopat(str);
+  },
+  render: function() {
+    return el.div(
+      {className: 'form-group'},
+      el.p(
+        {className: 'lead'},
+        el.strong(
+          // If wagerError, make the label red
+          betStore.state.wager.error ? { style: {color: 'black'} } : null,
+          'Increase by % on win:')
+      ),
+      el.div(
+        {className: 'input-group'},
+        el.input(
+          {
+            type: 'text',
+            value: betStore.state.onwin.str,
+            className: 'form-control input-lg',
+            onChange: this._onStopatChange,
+            disabled: !!worldStore.state.isLoading
+          }
+        ),
+        el.span(
+          {className: 'input-group-addon'}
+        )
+      )
+    );
+  }
+});
+
 var ActualMultiplier = React.createClass({
   displayName: 'ActualMultiplier',
   // Hookup to stores
@@ -2312,7 +2394,7 @@ var BetBox = React.createClass({
   }
 });
 
-var BetBox = React.createClass({
+var betboxautobet = React.createClass({
   displayName: 'BetBoxAutoBet',
   _onStoreChange: function() {
     this.forceUpdate();
@@ -2340,9 +2422,17 @@ var BetBox = React.createClass({
               {className: 'col-xs-6'},
               React.createElement(StopAt, null)
             ),
+            el.div(
+              {className: 'col-xs-6'},
+              React.createElement(, null)
+            ),
+			 el.div(
+              {className: 'col-xs-6'},
+              React.createElement(AutobetOnLoss, null)
+            ),
 			el.div(
               {className: 'col-xs-12'},
-              React.createElement(Clientseed, null)
+              React.createElement(AutobetOnWin, null)
             ),
             el.div(
             ),
@@ -2907,7 +2997,11 @@ var App = React.createClass({
       {className: 'container'},
       // Navbar
       React.createElement(Navbar, null),
-      // BetBox & ChatBox
+ el.div(
+        {style: {marginTop: '15px'}},
+        React.createElement(BettingTabs, null)
+      ),
+	  // BetBox & ChatBox
       el.div(
         {className: 'row'},
         el.div(
