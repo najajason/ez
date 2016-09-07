@@ -1898,7 +1898,7 @@ var BetBoxWager = React.createClass({
     );
   }
 });
-var curmultiplier = 1;
+var curmultiplier = 100;
 var houseedgerunning = 0;
 var BetBoxButton = React.createClass({
   displayName: 'BetBoxButton',
@@ -1957,7 +1957,7 @@ var BetBoxButton = React.createClass({
 		  };
  } else if (currentMultiplier == 1.01) {
  console.log("NOT IN BET TAB");
- currentBet = parseFloat(betStore.state.wager.num*curmultiplier*100);
+ currentBet = parseFloat(betStore.state.wager.num*curmultiplier).toFixed(2);
  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  stopped = 1;
@@ -1995,7 +1995,7 @@ var BetBoxButton = React.createClass({
 if (bet.profit <= 0){
 curmultiplier = (curmultiplier*betStore.state.onloss)/100;
 if (curmultiplier == 0) {
-curmultiplier = 1;
+curmultiplier = 100;
 }
 		  if (worldStore.state.user.balance < currentBet && worldStore.state.hotkeysEnabled == true){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
@@ -2004,7 +2004,7 @@ curmultiplier = 1;
 		  } else {
 curmultiplier = (curmultiplier*betStore.state.onwin)/100;
 if (curmultiplier == 0) {
-curmultiplier = 1;
+curmultiplier = 100;
 }
 houseedgerunning = 1;
 		  }
