@@ -2422,6 +2422,12 @@ var BetBoxAutoBet = React.createClass({
               {className: 'col-xs-6'},
               React.createElement(StopAt, null)
             ),
+            // HR
+            el.div(
+              {className: 'row'},
+              el.div(
+              )
+            ),
             el.div(
               {className: 'col-xs-6'},
               React.createElement(AutobetOnLoss, null)
