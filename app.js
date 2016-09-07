@@ -1990,7 +1990,7 @@ var BetBoxButton = React.createClass({
 		  bet.busted = totalmultiplier-0.01;
 		  lastbet = bet;
 if (bet.profit <= 0){
-if )multiplied == 0){
+if (multiplied == 0){
 curmultiplier = parseInt(curmultiplier*betStore.state.onloss.num)/100;
 } else {
 multiplied = 0;
