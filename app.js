@@ -27,6 +27,7 @@ var bignumber = Math.pow(2,32)
 var continueafterdeath = 1
 var multiplied = 0
 var betbust = 0
+var lastprofit = 0;
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
