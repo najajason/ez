@@ -715,8 +715,8 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
-		lastprofit = firstwager*(totalmultiplier-0.01);
-		betbust = totalmultiplier-0.01;
+		lastprofit = currentBet-1;
+		betbust = currentBet-0.01;
 		houseedgerunning = 1;
 		
 		    Dispatcher.sendAction('START_REFRESHING_USER');
@@ -2746,7 +2746,7 @@ var MyBetsTabContent = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10((bet.firstwager/100), -2),
+        helpers.round10((bet.firstwager), -2),
         ' bits'
       ),
       // Stopped at
