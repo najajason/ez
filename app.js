@@ -706,7 +706,7 @@ var worldStore = new Store('world', {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
-	if (currBetTab == 'BETTING'){
+	if (self.state.currBetTab == 'BETTING'){
 		currentBet = betStore.state.wager.num;
 		} else {
 		}
