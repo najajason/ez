@@ -2062,14 +2062,18 @@ houseedgerunning = 1;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		bet.busted = totalmultiplier-0.01;
+		betbust = totalmultiplier-0.01;
+		bet.busted = betbust;
+		bet.firstwager = currentBet;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		bet.busted = totalmultiplier-0.01;
+		betbust = totalmultiplier-0.01;
+		bet.busted = betbust;
+		bet.firstwager = currentBet;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2080,14 +2084,18 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		currentBet = betStore.state.wager.num;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
+		bet.busted = betbust;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
+		  bet.firstwager = currentBet;
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  bet.busted = betbust;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
+		  bet.firstwager = currentBet;
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  }
@@ -2754,10 +2762,10 @@ var MyBetsTabContent = React.createClass({
       ),
               // profit
               el.td(
-                {style: {color: bet.profit > 0 ? 'green' : 'red'}},
-                bet.profit > 0 ?
-                  '+' + helpers.round10((((bet.wager/100)/(bet.busted-0.01))*bet.busted)-(bet.wager/100)/(bet.busted), -2) :
-                  "-"+helpers.round10((bet.wager/100)/(bet.busted), -2),
+                {style: {color: bet.lastprofit > 0 ? 'green' : 'red'}},
+                bet.lastprofit > 0 ?
+                  '+' + helpers.round10(bet.lastprofit, -2) :
+                  "-"+helpers.round10((bet.firstwager/100), -2),
                 ' bits'
               )
             );
