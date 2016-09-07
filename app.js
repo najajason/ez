@@ -714,6 +714,7 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
+		lastprofit = firstwager*(totalmultiplier-0.01);
 		betbust = totalmultiplier-0.01;
 		houseedgerunning = 1;
 		
@@ -2066,6 +2067,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		betbust = totalmultiplier-0.01;
 		bet.busted = betbust;
+		bet.lastprofit = lastprofit;
 		bet.firstwager = currentBet;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
@@ -2075,6 +2077,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		betbust = totalmultiplier-0.01;
 		bet.busted = betbust;
+		bet.lastprofit = lastprofit;
 		bet.firstwager = currentBet;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
@@ -2087,6 +2090,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
 		bet.busted = betbust;
+		bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  bet.firstwager = currentBet;
@@ -2095,6 +2099,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		} else {
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  bet.busted = betbust;
+		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  bet.firstwager = currentBet;
@@ -2763,9 +2768,9 @@ var MyBetsTabContent = React.createClass({
       ),
               // profit
               el.td(
-                {style: {color: (bet.firstwager*bet.busted) > 0 ? 'green' : 'red'}},
+                {style: {color: bet.lastprofit > 0 ? 'green' : 'red'}},
                 bet.lastprofit > 0 ?
-                  '+' + helpers.round10(bet.firstwager*bet.busted, -2) :
+                  '+' + helpers.round10(bet.lastprofit, -2) :
                   "-"+helpers.round10((bet.firstwager/100), -2),
                 ' bits'
               )
