@@ -3006,7 +3006,7 @@ var App = React.createClass({
         {className: 'row'},
         el.div(
           {className: 'col-sm-5'},
-          React.createElement(BetBoxContent, null)
+          React.createElement(BetBox, null)
         ),
         el.div(
           {className: 'col-sm-7'},
