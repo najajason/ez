@@ -750,6 +750,9 @@ var worldStore = new Store('world', {
   });
   
     Dispatcher.registerCallback('TOGGLE_CONTINUE', function() {
+	if (autobettoggle == 1 || self.state.hotkeysEnabled == false){
+	stopped = 1;
+	}
     self.emitter.emit('change', self.state);
 		if (autobettoggle == 1){
 autobettoggle = 0;
