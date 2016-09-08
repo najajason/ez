@@ -681,6 +681,7 @@ var worldStore = new Store('world', {
 
     Dispatcher.registerCallback('CHANGE_BETTAB', function(tabName) {
 	stopped = 1;
+	autobettoggle = 1;
 	  if (self.state.AutobetEnabled == true){
   		  Dispatcher.sendAction('TOGGLE_AUTOBET');
 		  }
