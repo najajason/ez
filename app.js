@@ -2273,7 +2273,7 @@ Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  disabled: (stopped == 0 && worldStore.state.hotkeysEnabled == false && continueafterdeath == 1)
           },
           worldStore.state.hotkeysEnabled ?
-            'Cashout: '+ ((totalmultiplier-0.01)*betStore.state.wager.num).toFixed(2)+" bits" :
+            'Cashout: '+ ((currentBet)).toFixed(2)+" bits" :
           'Place Bet'
         )
       )
