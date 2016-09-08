@@ -2021,12 +2021,6 @@ houseedgerunning = 1;
 		  if (totalmultiplier > betStore.state.stopat.num && worldStore.state.hotkeysEnabled == true && betStore.state.stopat.num > 0 && stopatstopped == 0){
 		  stopatstopped = 1;
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
-		bet.busted = betbust;
-		bet.lastprofit = lastprofit;
-		  bet.crashed = totalmultiplier-0.01;
-		  lastbet = bet;
-		  bet.firstwager = currentBet;
-		  Dispatcher.sendAction('NEW_BET', bet);
 		  };
 
 		  
