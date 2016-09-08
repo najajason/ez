@@ -2094,6 +2094,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
+		firstwagervar = (currentBet*curmultiplier/100);
 		bet.firstwager = (currentBet*curmultiplier/100);
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
@@ -2104,6 +2105,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
+		firstwagervar = (currentBet*curmultiplier/100);
 		bet.firstwager = (currentBet*curmultiplier/100);
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
@@ -2119,6 +2121,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
+		  firstwagervar = (currentBet*curmultiplier/100);
 		  bet.firstwager = (currentBet*curmultiplier/100);
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
@@ -2128,6 +2131,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
+		  firstwagervar = (currentBet*curmultiplier/100);
 		  bet.firstwager = (currentBet*curmultiplier/100);
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
@@ -2790,7 +2794,7 @@ var MyBetsTabContent = React.createClass({
             fontFamily: 'monospace'
           }
         },
-        ((bet.busted/100)).toFixed(2)
+        ((bet.busted/100/bet.firstwager)).toFixed(2)
       ),
               // profit
               el.td(
