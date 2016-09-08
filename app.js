@@ -2094,7 +2094,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		bet.firstwager = currentBet;
+		bet.firstwager = (currentBet*curmultiplier/100);
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2104,7 +2104,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		bet.firstwager = currentBet;
+		bet.firstwager = (currentBet*curmultiplier/100);
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2119,7 +2119,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  bet.firstwager = currentBet;
+		  bet.firstwager = (currentBet*curmultiplier/100);
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
@@ -2128,7 +2128,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  bet.firstwager = currentBet;
+		  bet.firstwager = (currentBet*curmultiplier/100);
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  }
