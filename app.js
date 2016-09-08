@@ -2355,7 +2355,7 @@ var ContinueToggle = React.createClass({
             style: { marginTop: '-15px' }
           },
           'Continue after cashout: ',
-          continueafterdeath == 1 ?
+          autobettoggle == 1 ?
             el.span({className: 'label label-success'}, 'ON') :
           el.span({className: 'label label-default'}, 'OFF')
         )
