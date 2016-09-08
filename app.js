@@ -2478,7 +2478,7 @@ var BetBox = React.createClass({
             ),
 	  el.div(
 	  {className: 'row'},
-      React.createElement(ContinueToggle, null),
+      // React.createElement(ContinueToggle, null),
 	  React.createElement(HouseEdgeThingy, null)
 
 	  )
