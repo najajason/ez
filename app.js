@@ -724,6 +724,7 @@ var worldStore = new Store('world', {
 		
 		    Dispatcher.sendAction('START_REFRESHING_USER');
   }
+  }
   } else {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
