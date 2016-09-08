@@ -2381,7 +2381,7 @@ var AutobetToggle = React.createClass({
             style: { marginTop: '-15px' }
           },
           'Autobet: ',
-          continueafterdeath == 1 ?
+          autobettoggle == 1 ?
             el.span({className: 'label label-success'}, 'ON') :
           el.span({className: 'label label-default'}, 'OFF')
         )
