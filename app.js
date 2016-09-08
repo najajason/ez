@@ -708,7 +708,7 @@ var worldStore = new Store('world', {
 
   Dispatcher.registerCallback('TOGGLE_HOTKEYS', function() {
   if (worldStore.state.currBetTab == 'AUTOBET'){
-  if (autobettoggle == 1){
+  if (autobettoggle == 1 || self.state.hotkeysEnabled = true){
   self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
