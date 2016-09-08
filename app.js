@@ -27,6 +27,7 @@ var bignumber = Math.pow(2,32)
 var continueafterdeath = 1
 var multiplied = 0
 var betbust = 0
+var autobettoggle = 1;
 var lastprofit = 0;
 var config = {
   // - Your app's id on moneypot.com
@@ -706,6 +707,24 @@ var worldStore = new Store('world', {
   });
 
   Dispatcher.registerCallback('TOGGLE_HOTKEYS', function() {
+  if (worldStore.state.currBetTab == 'AUTOBET'){
+  if (autobetEnabled == 1){
+  self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
+    self.emitter.emit('change', self.state);
+	if (self.state.hotkeysEnabled == true){
+		currentBet = betStore.state.wager.num;
+		totalmultiplier = 1.01;
+		currentMultiplier = 1.01;
+		stopped = 0;
+		stopatstopped = 0;
+		} else {
+		lastprofit = currentBet-1;
+		betbust = currentBet-0.01;
+		houseedgerunning = 1;
+		
+		    Dispatcher.sendAction('START_REFRESHING_USER');
+  }
+  } else {
     self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
@@ -721,6 +740,7 @@ var worldStore = new Store('world', {
 		
 		    Dispatcher.sendAction('START_REFRESHING_USER');
 		}
+		}
   });
   
     Dispatcher.registerCallback('TOGGLE_AUTOBET', function() {
@@ -730,10 +750,10 @@ var worldStore = new Store('world', {
   
     Dispatcher.registerCallback('TOGGLE_CONTINUE', function() {
     self.emitter.emit('change', self.state);
-	if (continueafterdeath == 1){
-continueafterdeath = 0;
+		if (autobettoggle == 1){
+autobettoggle = 0;
 		} else {
-continueafterdeath = 1;
+autobettoggle = 1;
 		}
   });
   
