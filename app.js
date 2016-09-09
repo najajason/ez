@@ -720,7 +720,7 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
-		lastprofit = currentBet-betStore.state.wager.num;
+		lastprofit = currentBet-firstwagervar;
 		betbust = currentBet-0.01;
 		houseedgerunning = 1;
 		
@@ -737,7 +737,7 @@ var worldStore = new Store('world', {
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
-		lastprofit = currentBet-betStore.state.wager.num;
+		lastprofit = currentBet-firstwagervar;
 		betbust = currentBet-0.01;
 		houseedgerunning = 1;
 		
