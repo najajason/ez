@@ -29,6 +29,7 @@ var multiplied = 0
 var betbust = 0
 var autobettoggle = 1;
 var lastprofit = 0;
+var firstwagervar = 0;
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
