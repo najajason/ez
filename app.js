@@ -2073,7 +2073,7 @@ houseedgerunning = 1;
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
-		curmultiplier = parseInt((curmultiplier*betStore.state.onwin.num)/100);
+		curmultiplier = (parseInt(betStore.state.onwin.num)*curmultiplier/100);
 		curmultiplierdivision = parseInt(betStore.state.onwin.num)/100;
 		multiplied = 1;
 		if (curmultiplier == 0) {
