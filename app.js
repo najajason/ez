@@ -29,6 +29,7 @@ var multiplied = 0
 var betbust = 0
 var autobettoggle = 1;
 var lastprofit = 0;
+var curmultiplier = 100;
 var firstwagervar = 0;
 var config = {
   // - Your app's id on moneypot.com
@@ -1927,7 +1928,7 @@ var BetBoxWager = React.createClass({
     );
   }
 });
-var curmultiplier = 100;
+
 var houseedgerunning = 0;
 var BetBoxButton = React.createClass({
   displayName: 'BetBoxButton',
