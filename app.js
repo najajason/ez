@@ -718,6 +718,7 @@ var worldStore = new Store('world', {
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
+		firstwagervar = currentBet*curmultiplier/100;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
 		stopped = 0;
@@ -2100,8 +2101,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
-		bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		firstwagervar = firstwagervar;
+		bet.firstwager = firstwagervar;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2111,8 +2112,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
-		bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		firstwagervar = firstwagervar;
+		bet.firstwager = firstwagervar;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2127,8 +2128,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
-		  bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		  bet.firstwager = firstwagervar;
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
@@ -2137,8 +2137,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
-		  bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		  bet.firstwager = firstwagervar;
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
