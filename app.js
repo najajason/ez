@@ -31,6 +31,7 @@ var autobettoggle = 1;
 var lastprofit = 0;
 var curmultiplier = 100;
 var firstwagervar = 0;
+var curmultiplierdivision = 1;
 var config = {
   // - Your app's id on moneypot.com
   app_ida: 1279,                             // <----------------------------- EDIT ME!
@@ -2023,6 +2024,7 @@ var BetBoxButton = React.createClass({
 if (bet.profit <= 0){
 if (multiplied == 0){
 curmultiplier = parseInt(curmultiplier*betStore.state.onloss.num)/100;
+curmultiplierdivision = parseInt(betStore.state.onloss.num)/100
 } else {
 multiplied = 0;
 }
@@ -2069,9 +2071,11 @@ houseedgerunning = 1;
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
-		curmultiplier = parseInt((curmultiplier*betStore.state.onwin.num));
+		curmultiplier = parseInt((curmultiplier*betStore.state.onwin.num)/100);
+		curmultiplierdivision = parseInt(betStore.state.onwin.num)/100;
 		multiplied = 1;
 		if (curmultiplier == 0) {
+		curmultiplierdivision = 1;
 		curmultiplier = parseInt(100);
 		multiplied = 1;
 		}
@@ -2096,8 +2100,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = (currentBet*curmultiplier/100);
-		bet.firstwager = (currentBet*curmultiplier/100);
+		firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2107,8 +2111,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = (currentBet*curmultiplier/100);
-		bet.firstwager = (currentBet*curmultiplier/100);
+		firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
 		  Dispatcher.sendAction('NEW_BET', bet);
@@ -2123,8 +2127,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  firstwagervar = (currentBet*curmultiplier/100);
-		  bet.firstwager = (currentBet*curmultiplier/100);
+		  firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		  bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
@@ -2133,8 +2137,8 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
-		  firstwagervar = (currentBet*curmultiplier/100);
-		  bet.firstwager = (currentBet*curmultiplier/100);
+		  firstwagervar = (currentBet*curmultiplier/(100*curmultiplierdivision));
+		  bet.firstwager = (currentBet*curmultiplier/(100*curmultiplierdivision));
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
