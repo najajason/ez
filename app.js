@@ -738,6 +738,7 @@ var worldStore = new Store('world', {
 		currentBet = betStore.state.wager.num;
 		totalmultiplier = 1.01;
 		currentMultiplier = 1.01;
+		firstwagervar = currentBet*curmultiplier/100;
 		stopped = 0;
 		stopatstopped = 0;
 		} else {
@@ -2101,7 +2102,6 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = firstwagervar;
 		bet.firstwager = firstwagervar;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
@@ -2112,7 +2112,6 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		betbust = 0;
 		bet.busted = betbust;
 		bet.lastprofit = lastprofit;
-		firstwagervar = firstwagervar;
 		bet.firstwager = firstwagervar;
 		  bet.crashed = totalmultiplier-0.01;
 		  lastbet = bet;
