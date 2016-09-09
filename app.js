@@ -713,7 +713,7 @@ var worldStore = new Store('world', {
   Dispatcher.registerCallback('TOGGLE_HOTKEYS', function() {
   if (worldStore.state.currBetTab == 'AUTOBET'){
   if (autobettoggle == 1 || self.state.hotkeysEnabled == true){
-  self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
+   self.state.hotkeysEnabled = !self.state.hotkeysEnabled;
     self.emitter.emit('change', self.state);
 	if (self.state.hotkeysEnabled == true){
 		currentBet = betStore.state.wager.num;
@@ -2128,7 +2128,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
 		} else {
-		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
+		  
 		  bet.busted = betbust;
 		  bet.lastprofit = lastprofit;
 		  bet.crashed = totalmultiplier-0.01;
@@ -2137,6 +2137,7 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  bet.firstwager = (currentBet*curmultiplier/100);
 		  Dispatcher.sendAction('NEW_BET', bet);
 		  console.log(lastbet);
+		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		Dispatcher.sendAction('START_REFRESHING_USER');
 		}
