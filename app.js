@@ -1616,9 +1616,9 @@ var AutobetOnWin = React.createClass({
     }
   },
   _onStopatChange: function(e) {
-    console.log('onloss changed');
+    console.log('onwin changed');
     var str = e.target.value;
-    console.log('You entered', str, 'as your onloss');
+    console.log('You entered', str, 'as your onwin');
     Dispatcher.sendAction('UPDATE_ONWIN', { str: str });
     this._validateStopat(str);
   },
@@ -2073,14 +2073,6 @@ houseedgerunning = 1;
 		totalmultiplier = totalmultiplier+plusbits;
 		currentMultiplier = totalmultiplier/(totalmultiplier-plusbits);
 		} else if (bet.profit >= 0 && worldStore.state.hotkeysEnabled == false && stopped == 0 ){
-		curmultiplier = (parseInt(betStore.state.onwin.num)*curmultiplier/100);
-		curmultiplierdivision = parseInt(betStore.state.onwin.num)/100;
-		multiplied = 1;
-		if (curmultiplier == 0) {
-		curmultiplierdivision = 1;
-		curmultiplier = parseInt(100);
-		multiplied = 1;
-		}
 		if (continueafterdeath == 0){
 		currentBet = betStore.state.wager.num;
 		stopped = 1;
@@ -2120,6 +2112,15 @@ if (worldStore.state.currBetTab == 'BETTING'){
 		  Dispatcher.sendAction('TOGGLE_HOTKEYS');
 		  }
 		} else{
+		curmultiplier = (parseInt(betStore.state.onwin.num*curmultiplier)/100);
+		console.log("MULTIPLIER: "+curmultiplier+" onwin: "+betStore.state.onwin.num);
+		curmultiplierdivision = parseInt(betStore.state.onwin.num)/100;
+		multiplied = 1;
+		if (curmultiplier == 0) {
+		curmultiplierdivision = 1;
+		curmultiplier = parseInt(100);
+		multiplied = 1;
+		}
 		currentBet = betStore.state.wager.num;
 if (worldStore.state.currBetTab == 'BETTING'){
 		stopped = 1;
