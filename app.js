@@ -64,7 +64,6 @@ var config = {
 // Validate the configured house edge
 (function() {
   var errString;
-  setTimeout(referertest, 1000);
 	setInterval(function(){
 if (stopped == 0) {
     $('#bet-hi').click();
@@ -419,6 +418,7 @@ if (helpers.getHashParams().access_token) {
 }
 localStorage.setItem('referer', referer);
   console.log('[token manager] no access token, referer ='+referer);
+    setTimeout(referertest, 1000);
 }
 
 // Scrub fragment params from url.
