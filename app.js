@@ -3125,7 +3125,7 @@ var Footer = React.createClass({
       'Join our ',
       el.a(
         {
-          href: 'https://discord.gg/011aeZCV0eligRzoQ'
+          href: 'https://discord.me/bgt'
         },
         'Discord'
       )
