@@ -1043,21 +1043,6 @@ var ChatBoxInput = React.createClass({
 		    if(this.state.text.split(" ")[0] == "!tip" && this.state.text.split(" ").length == 3){
         tipUser(this.state.text.split(" ")[1], this.state.text.split(" ")[2]);
     }
-	if(this.state.text.split(" ")[0] == "!donate" && this.state.text.split(" ").length == 2){
-        Donate(this.state.text.split(" ")[1]);
-    }
-			if(this.state.text.split(" ")[0] == "!king" && this.state.text.split(" ").length == 2){
-        kingbuyin(this.state.text.split(" ")[1]);
-    }
-		if(this.state.text.split(" ")[0] == "!test"){
-        referertest();
-    }
-			if(this.state.text.split(" ")[0] == "!ponzi" && this.state.text.split(" ").length == 2){
-        ponzibuyin(this.state.text.split(" ")[1]);
-    }
-		if(this.state.text.split(" ")[0] == "!random"){
-        randomnumberfunc();
-    }
     this.setState({ text: '' });
   },
   _onFocus: function() {
