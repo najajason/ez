@@ -2912,13 +2912,13 @@ var FaucetTabContent = React.createClass({
     case 'ALREADY_CLAIMED':
       innerNode = el.div(
         null,
-        'ALREADY_CLAIMED'
+        'You have already claimed your bits, please come back in a few minutes!'
       );
       break;
     case 'WAITING_FOR_SERVER':
       innerNode = el.div(
         null,
-        'WAITING_FOR_SERVER'
+        'Waiting for server, please hang on tight!'
       );
       break;
     default:
